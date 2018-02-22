@@ -18,6 +18,17 @@ try
                 $controller->post();
             }
         }
+        else if ($_GET['action'] == 'addComment')
+        {
+            if (!empty($_POST['author']) && !empty($_POST['content']))
+            {
+                $controller->addComment($_GET['id'], $_POST['author'], $_POST['content']);
+            }
+            else
+            {
+                throw new Exception('Tous les champs ne sont pas remplis');
+            }
+        }
     }
     else
     {
