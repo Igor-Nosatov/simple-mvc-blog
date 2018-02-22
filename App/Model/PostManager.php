@@ -15,4 +15,21 @@ class PostManager extends Manager
 
         return $posts;
     }
+
+    public function getSingle($id)
+    {
+        $db = $this->dbConnect();
+
+        $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id = :id';
+
+        $req = $db->prepare($sql);
+        
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Post');
+        $post = $req->fetch();
+
+        return $post;
+    }
 }
