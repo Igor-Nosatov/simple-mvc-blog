@@ -21,4 +21,18 @@ class CommentManager extends Manager
 
         return $comments;
     }
+
+    public function add($postId, $author, $content)
+    {
+        $db = $this->dbConnect();
+
+        $sql = 'INSERT INTO comments SET postId = :postId, author = :author, content = :content, dateAdded = NOW()';
+
+        $req = $db->prepare($sql);
+
+        $req->bindValue(':postId', $postId, PDO::PARAM_INT);
+        $req->bindValue(':author', $author, PDO::PARAM_STR);
+        $req->bindValue(':content', $content, PDO::PARAM_STR);
+        $req->execute();
+    }
 }
