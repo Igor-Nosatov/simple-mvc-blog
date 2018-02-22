@@ -17,4 +17,11 @@ class Controller
 
         require('App/View/listPosts.php');
     }
+
+    public function post()
+    {
+        $post = $this->postManager->getSingle($_GET['id']);
+
+        require('App/View/post.php');
+    }
 }
