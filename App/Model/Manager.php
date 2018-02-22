@@ -2,7 +2,7 @@
 
 class Manager
 {
-    function dbConnect()
+    protected function dbConnect()
     {
         require_once('App/Config/database.php');
        
