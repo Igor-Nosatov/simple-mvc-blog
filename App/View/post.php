@@ -12,6 +12,21 @@ ob_start();
     <?= $post->getContent() ?>
 </article>
 
+<?php
+foreach ($comments as $comment):
+?>
+    <article class="comment">
+        <header class="comment-header">
+            <h4 class="comment-heading">
+                <?= $comment->getAuthor() ?> 
+            </h4>
+        </header>
+        <?= $comment->getContent() ?>
+    </article>
+<?php
+endforeach;
+?>
+
 <?php 
 $content = ob_get_clean();
 require('template.php');
