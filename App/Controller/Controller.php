@@ -27,4 +27,11 @@ class Controller
 
         require('App/View/post.php');
     }
+
+    public function addComment($postId, $author, $content)
+    {
+        $this->commentManager->add($postId, $author, $content);
+
+        header('Location: index.php?action=post&id=' . $postId);
+    }
 }
