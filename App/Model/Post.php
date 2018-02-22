@@ -7,9 +7,12 @@ class Post
             $content,
             $dateAdded;
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
-        $this->hydrate($data);
+        if (!empty($data))
+        {
+            $this->hydrate($data);
+        }
     }
 
     public function hydrate(array $data)
