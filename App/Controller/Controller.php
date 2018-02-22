@@ -1,6 +1,7 @@
 <?php
 
 require_once('App/Model/PostManager.php');
+require_once('App/Model/CommentManager.php');
 
 class Controller
 {
@@ -9,6 +10,7 @@ class Controller
     public function __construct()
     {
         $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
     }
 
     public function listPosts()
@@ -21,6 +23,7 @@ class Controller
     public function post()
     {
         $post = $this->postManager->getSingle($_GET['id']);
+        $comments = $this->commentManager->getComments($_GET['id']);
 
         require('App/View/post.php');
     }
