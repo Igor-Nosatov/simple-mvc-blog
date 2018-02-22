@@ -27,6 +27,12 @@ foreach ($comments as $comment):
 endforeach;
 ?>
 
+<form action="index.php?action=addComment&id=<?= $post->getId() ?>" method="post" class="comment-form">
+    <input type="text" name="author" id="author">
+    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+    <input type="submit" value="Envoyer">
+</form>
+
 <?php 
 $content = ob_get_clean();
 require('template.php');
