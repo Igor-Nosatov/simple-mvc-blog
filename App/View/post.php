@@ -18,10 +18,10 @@ foreach ($comments as $comment):
     <article class="comment">
         <header class="comment-header">
             <h4 class="comment-heading">
-                <?= $comment->getAuthor() ?> 
+                <?= htmlspecialchars($comment->getAuthor()) ?> 
             </h4>
         </header>
-        <?= $comment->getContent() ?>
+        <?= nl2br(htmlspecialchars($comment->getContent())) ?>
     </article>
 <?php
 endforeach;
