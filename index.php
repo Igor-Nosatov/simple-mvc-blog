@@ -29,6 +29,24 @@ try
                 throw new Exception('Tous les champs ne sont pas remplis');
             }
         }
+        else if ($_GET['action'] == 'authenticate')
+        {
+            if (!empty($_POST['username'] && !empty($_POST['password'])))
+            {
+                $controller->authenticate($_POST['username'], $_POST['password']);
+            }
+        }
+        else if ($_GET['action'] == 'admin')
+        {
+            if (!isset($_SESSION['id']))
+            {
+                require('App/View/login.php');
+            }
+            else
+            {
+                require('App/View/adminPanel.php');
+            }
+        }
     }
     else
     {
@@ -37,5 +55,5 @@ try
 }
 catch (Exception $e)
 {
-
+    echo $e;
 }
