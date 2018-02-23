@@ -41,7 +41,7 @@ class Controller
     {
         $user = $this->userManager->get($username, $password);
 
-        if(!$user)
+        if(!$user || !password_verify($password, $user->getPassword()))
         {
             throw new Exception('Login ou mot de passe invalide');
         }
