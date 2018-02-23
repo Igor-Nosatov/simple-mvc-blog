@@ -32,4 +32,17 @@ class PostManager extends Manager
 
         return $post;
     }
+
+    public function add($title, $content)
+    {
+        $db = $this->dbConnect();
+
+        $sql = 'INSERT INTO posts SET title = :title, content = :content, dateAdded = NOW()';
+
+        $req = $db->prepare($sql);
+
+        $req->bindValue(':title', $title, PDO::PARAM_STR);
+        $req->bindValue(':content', $content, PDO::PARAM_STR);
+        $req->execute();
+    }
 }

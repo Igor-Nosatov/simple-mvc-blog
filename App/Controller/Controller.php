@@ -3,6 +3,7 @@
 require_once('App/Model/PostManager.php');
 require_once('App/Model/CommentManager.php');
 require_once('App/Model/UserManager.php');
+require_once('App/Model/Post.php');
 
 class Controller
 {
@@ -50,5 +51,10 @@ class Controller
             $user->login();
             header('Location: index.php?action=admin');
         }
+    }
+
+    public function addPost($title, $content)
+    {
+        $this->postManager->add($title, $content);
     }
 }

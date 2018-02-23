@@ -47,6 +47,20 @@ try
                 require('App/View/adminPanel.php');
             }
         }
+        else if (isset($_SESSION['id']))
+        {
+            if($_GET['action'] == 'writePost')
+            {
+                require('App/View/writePost.php');
+            }
+            else if($_GET['action'] == 'addPost')
+            {
+                if(!empty($_POST['title']) && !empty($_POST['content']))
+                {
+                    $controller->addPost($_POST['title'], $_POST['content']);
+                }
+            }
+        }
     }
     else
     {
