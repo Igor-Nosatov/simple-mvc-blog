@@ -2,6 +2,7 @@
 
 require_once('App/Model/PostManager.php');
 require_once('App/Model/CommentManager.php');
+require_once('App/Model/UserManager.php');
 
 class Controller
 {
@@ -11,6 +12,7 @@ class Controller
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
+        $this->userManager = new UserManager();
     }
 
     public function listPosts()
@@ -33,5 +35,20 @@ class Controller
         $this->commentManager->add($postId, $author, $content);
 
         header('Location: index.php?action=post&id=' . $postId);
+    }
+
+    public function authenticate($username, $password)
+    {
+        $user = $this->userManager->get($username, $password);
+
+        if(!$user)
+        {
+            throw new Exception('Login ou mot de passe invalide');
+        }
+        else
+        {
+            $user->login();
+            header('Location: index.php?action=admin');
+        }
     }
 }
