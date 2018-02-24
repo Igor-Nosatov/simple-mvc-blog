@@ -74,4 +74,9 @@ class Controller
 
         $this->postManager->update($post);
     }
+
+    public function deletePost($id)
+    {
+        $this->postManager->delete($id);
+    }
 }

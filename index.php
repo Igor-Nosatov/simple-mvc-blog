@@ -74,6 +74,13 @@ try
                     $controller->executeUpdatePost($_GET['id'], $_POST['title'], $_POST['content']);
                 }
             }
+            else if($_GET['action'] == 'deletePost')
+            {
+                if (isset($_GET['id']) && $_GET['id'] > 0)
+                {
+                    $controller->deletePost($_GET['id']);
+                }
+            }
         }
     }
     else

@@ -61,4 +61,16 @@ class PostManager extends Manager
         $req->execute();
 
     }
+
+    public function delete($id)
+    {
+        $db = $this->dbConnect();
+        
+        $sql = 'DELETE FROM posts WHERE id = :id';
+
+        $req = $db->prepare($sql);
+        
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+    }
 }
