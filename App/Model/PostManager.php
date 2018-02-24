@@ -49,7 +49,6 @@ class PostManager extends Manager
     public function update(Post $post)
     {
         $db = $this->dbConnect();
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = 'UPDATE posts SET title = :title, content = :content WHERE id = :id';
 
