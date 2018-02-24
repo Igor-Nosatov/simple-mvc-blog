@@ -55,7 +55,9 @@ class Post
 
     public function setId($id)
     {
-        if ($id > 0 && is_int($id))
+        $id = (int) $id;
+
+        if ($id > 0)
         {
             $this->id = $id;
         }
