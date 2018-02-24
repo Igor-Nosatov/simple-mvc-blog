@@ -1,41 +1,16 @@
 <?php
 
-class Comment
+require_once('App/Model/Entity.php');
+
+class Comment extends Entity
 {
-    private $id,
-            $postId,
+    private $postId,
             $author,
             $content,
             $dateAdded;
 
-    public function __construct(array $data = [])
-    {
-        if (!empty($data))
-        {
-            $this->hydrate($data);
-        }
-    }
-
-    public function hydrate(array $data)
-    {
-        foreach ($data as $key => $value)
-        {
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
-    }
-
     // GETTERS
     
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function getPostId()
     {
         return $this->postId;
@@ -59,14 +34,6 @@ class Comment
     
     // SETTERS
 
-    public function setId($id)
-    {
-        if ($id > 0 && is_int($id))
-        {
-            $this->id = $id;
-        }
-    }
-    
     public function setPostId($postId)
     {
         if ($id > 0 && is_int($postId))

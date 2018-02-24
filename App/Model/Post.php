@@ -1,40 +1,15 @@
 <?php
 
-class Post
+require_once('App/Model/Entity.php');
+
+class Post extends Entity
 {
-    private $id,
-            $title,
+    private $title,
             $content,
             $dateAdded;
 
-    public function __construct(array $data = [])
-    {
-        if (!empty($data))
-        {
-            $this->hydrate($data);
-        }
-    }
-
-    public function hydrate(array $data)
-    {
-        foreach ($data as $key => $value)
-        {
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
-    }
-
     // GETTERS
     
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function getTitle()
     {
         return $this->title;
@@ -52,16 +27,6 @@ class Post
     }
     
     // SETTERS
-
-    public function setId($id)
-    {
-        $id = (int) $id;
-
-        if ($id > 0)
-        {
-            $this->id = $id;
-        }
-    }
 
     public function setTitle($title)
     {

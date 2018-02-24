@@ -2,33 +2,13 @@
 
 session_start();
 
-class User
+require_once('App/Model/Entity.php');
+
+class User extends Entity
 {
-    private $id,
-            $username,
+    private $username,
             $password;
     
-    public function __construct(array $data = [])
-    {
-        if (!empty($data))
-        {
-            $this->hydrate($data);
-        }
-    }
-
-    public function hydrate(array $data)
-    {
-        foreach ($data as $key => $value)
-        {
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
-    }
-
     public function login()
     {
         $_SESSION['id'] = $this->id;
@@ -36,11 +16,6 @@ class User
 
     // GETTERS
     
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function getUsername()
     {
         return $this->username;
@@ -52,14 +27,6 @@ class User
     }
 
     // SETTERS
-
-    public function setId($id)
-    {
-        if ($id > 0 && is_int($id))
-        {
-            $this->id = $id;
-        }
-    }
 
     public function setUsername($userame)
     {
