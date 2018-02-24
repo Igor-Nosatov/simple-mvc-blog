@@ -57,4 +57,21 @@ class Controller
     {
         $this->postManager->add($title, $content);
     }
+
+    public function updatePost($postId)
+    {
+        $post = $this->postManager->getSingle($postId);
+        require('App/View/updatePost.php');
+    }
+
+    public function executeUpdatePost($postId, $title, $content)
+    {
+        $post = new Post(array(
+            'id' => $postId,
+            'title' => $title,
+            'content' => $content
+        ));
+
+        $this->postManager->update($post);
+    }
 }

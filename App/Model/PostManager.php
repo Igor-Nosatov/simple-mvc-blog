@@ -45,4 +45,20 @@ class PostManager extends Manager
         $req->bindValue(':content', $content, PDO::PARAM_STR);
         $req->execute();
     }
+
+    public function update(Post $post)
+    {
+        $db = $this->dbConnect();
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = 'UPDATE posts SET title = :title, content = :content WHERE id = :id';
+
+        $req = $db->prepare($sql);
+        
+        $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
+        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
+        $req->execute();
+
+    }
 }

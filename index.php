@@ -60,6 +60,20 @@ try
                     $controller->addPost($_POST['title'], $_POST['content']);
                 }
             }
+            else if($_GET['action'] == 'updatePost')
+            {
+                if (isset($_GET['id']) && $_GET['id'] > 0)
+                {
+                    $controller->updatePost($_GET['id']);
+                }
+            }
+            else if($_GET['action'] == 'executeUpdatePost')
+            {
+                if (isset($_GET['id']) && $_GET['id'] > 0)
+                {
+                    $controller->executeUpdatePost($_GET['id'], $_POST['title'], $_POST['content']);
+                }
+            }
         }
     }
     else
