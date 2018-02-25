@@ -5,11 +5,18 @@ require_once('App/Model/Post.php');
 
 class PostManager extends Manager
 {
-    public function getPosts()
+    public function getPosts($limit = -1, $offset = -1)
     {
         $db = $this->dbConnect();
 
-        $req = $db->query('SELECT id, title, content, dateAdded FROM posts');
+        $sql = 'SELECT id, title, content, dateAdded FROM posts';
+
+        if ($limit != -1 || $offset != -1)
+        {
+            $sql .= ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset;
+        }
+
+        $req = $db->query($sql);
         
         $posts = $req->fetchAll(PDO::FETCH_CLASS, 'Post');
 
