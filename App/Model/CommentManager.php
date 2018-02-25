@@ -35,4 +35,29 @@ class CommentManager extends Manager
         $req->bindValue(':content', $content, PDO::PARAM_STR);
         $req->execute();
     }
+
+    public function update(Comment $comment)
+    {
+        $db = $this->dbConnect();
+
+        $sql = 'UPDATE comments SET content = :content WHERE id = :id';
+
+        $req = $db->prepare($sql);
+        
+        $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
+        $req->bindValue(':content', $comment->getContent(), PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    public function delete($id)
+    {
+        $db = $this->dbConnect();
+        
+        $sql = 'DELETE FROM comments WHERE id = :id';
+
+        $req = $db->prepare($sql);
+        
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+    }
 }
