@@ -64,4 +64,8 @@ class Comment extends Entity
         $this->dateAdded = $dateAdded;
     }
 
+    public function setFlag($flag)
+    {
+        $this->flag = (int) $flag;
+    }
 }

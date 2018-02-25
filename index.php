@@ -44,7 +44,7 @@ try
             }
             else
             {
-                require('App/View/adminPanel.php');
+                $controller->adminPanel();
             }
         }
         else if( $_GET['action'] == 'flagComment')
@@ -86,6 +86,20 @@ try
                 if (isset($_GET['id']) && $_GET['id'] > 0)
                 {
                     $controller->deletePost($_GET['id']);
+                }
+            }
+            else if($_GET['action'] == 'deleteComment')
+            {
+                if (isset($_GET['id']) && $_GET['id'] > 0)
+                {
+                    $controller->deleteComment($_GET['id']);
+                }
+            }
+            else if($_GET['action'] == 'unflagComment')
+            {
+                if (isset($_GET['id']) && $_GET['id'] > 0)
+                {
+                    $controller->unflagComment($_GET['id']);
                 }
             }
         }

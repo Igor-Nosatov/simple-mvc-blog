@@ -73,4 +73,31 @@ class CommentManager extends Manager
         $req->execute();
 
     }
+    
+    public function unflag($id)
+    {
+        $db = $this->dbConnect();
+
+        $sql = 'UPDATE comments SET flag = 0 WHERE id = :id';
+        
+        $req = $db->prepare($sql);
+
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+    }
+
+    public function getFlagged()
+    {
+        $db = $this->dbConnect();
+
+        $sql = 'SELECT * FROM comments WHERE flag > 0';
+
+        $req = $db->prepare($sql);
+        $req->execute();
+
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Comment');
+        $comments = $req->fetchAll();
+
+        return $comments;
+    }
 }

@@ -84,4 +84,20 @@ class Controller
     {
         $this->commentManager->flag($id);
     }
+
+    public function adminPanel()
+    {
+        $flaggedComments = $this->commentManager->getFlagged();
+        require('App/View/adminPanel.php');
+    }
+
+    public function deleteComment($id)
+    {
+        $this->commentManager->delete($id);
+    }
+
+    public function unflagComment($id)
+    {
+        $this->commentManager->unflag($id);
+    }
 }
