@@ -22,6 +22,7 @@ foreach ($comments as $comment):
             </h4>
         </header>
         <?= nl2br(htmlspecialchars($comment->getContent())) ?>
+        <a href="index.php?action=flagComment&id=<?= $comment->getId() ?>">Signaler</a>
     </article>
 <?php
 endforeach;

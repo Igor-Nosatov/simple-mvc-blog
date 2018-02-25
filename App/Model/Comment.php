@@ -7,7 +7,8 @@ class Comment extends Entity
     private $postId,
             $author,
             $content,
-            $dateAdded;
+            $dateAdded,
+            $flag;
 
     // GETTERS
     

@@ -60,4 +60,17 @@ class CommentManager extends Manager
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
     }
+
+    public function flag($id)
+    {
+        $db = $this->dbConnect();
+
+        $sql = 'UPDATE comments SET flag = 1 WHERE id = :id';
+        
+        $req = $db->prepare($sql);
+
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+
+    }
 }

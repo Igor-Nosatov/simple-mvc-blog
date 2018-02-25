@@ -47,6 +47,13 @@ try
                 require('App/View/adminPanel.php');
             }
         }
+        else if( $_GET['action'] == 'flagComment')
+        {
+            if (isset($_GET['id']) && $_GET['id'] > 0)
+            {
+                $controller->flagComment($_GET['id']);
+            }
+        }
         else if (isset($_SESSION['id']))
         {
             if($_GET['action'] == 'writePost')

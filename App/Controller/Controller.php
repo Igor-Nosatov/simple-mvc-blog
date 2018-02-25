@@ -79,4 +79,9 @@ class Controller
     {
         $this->postManager->delete($id);
     }
+
+    public function flagComment($id)
+    {
+        $this->commentManager->flag($id);
+    }
 }
