@@ -9,7 +9,7 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $sql = 'SELECT id, title, content, dateAdded FROM posts';
+        $sql = 'SELECT id, title, content, dateAdded, dateModified FROM posts';
 
         if ($limit != -1 || $offset != -1)
         {
@@ -57,7 +57,7 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $sql = 'UPDATE posts SET title = :title, content = :content WHERE id = :id';
+        $sql = 'UPDATE posts SET title = :title, content = :content, dateModified = NOW() WHERE id = :id';
 
         $req = $db->prepare($sql);
         

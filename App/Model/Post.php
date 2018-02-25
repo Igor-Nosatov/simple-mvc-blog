@@ -6,7 +6,8 @@ class Post extends Entity
 {
     private $title,
             $content,
-            $dateAdded;
+            $dateAdded,
+            $dateModified;
 
     // GETTERS
     
@@ -47,5 +48,10 @@ class Post extends Entity
     public function setDateAdded(DateTime $dateAdded)
     {
         $this->dateAdded = $dateAdded;
+    }
+
+    public function setDateModified(DateTime $dateModified)
+    {
+        $this->dateModified = $dateModified;
     }
 }
