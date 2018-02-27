@@ -8,9 +8,11 @@ foreach ($posts as $post):
 ?>
     <article class="post">
         <header class="post-header">
-            <h3 class="post-heading">
-                <?= $post->getTitle() ?>
-            </h3>
+            <a href="index.php?action=post&id=<?= $post->getId() ?>">
+                <h3 class="post-heading">
+                    <?= $post->getTitle() ?>
+                </h3>
+            </a>
         </header>
         <?= $post->getContent() ?>
     </article>
