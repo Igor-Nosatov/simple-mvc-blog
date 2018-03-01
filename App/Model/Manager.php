@@ -2,7 +2,14 @@
 
 class Manager
 {
-    protected function dbConnect()
+    protected $db;
+
+    public function __construct()
+    {
+        $this->db = $this->dbConnect();
+    }
+
+    private function dbConnect()
     {
         require('App/Config/database.php');
        

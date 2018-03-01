@@ -7,11 +7,9 @@ class CommentManager extends Manager
 {
     public function getComments($postId)
     {
-        $db = $this->dbConnect();
-
         $sql = 'SELECT id, postId, author, content, dateAdded FROM comments WHERE postId = :postId';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
 
         $req->bindValue(':postId', $postId, PDO::PARAM_INT);
         $req->execute();
@@ -24,11 +22,9 @@ class CommentManager extends Manager
 
     public function getSingle($id)
     {
-        $db = $this->dbConnect();
-
         $sql = 'SELECT id, postId, author, content, dateAdded FROM comments WHERE id = :id';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
 
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
@@ -41,11 +37,9 @@ class CommentManager extends Manager
 
     public function add($postId, $author, $content)
     {
-        $db = $this->dbConnect();
-
         $sql = 'INSERT INTO comments SET postId = :postId, author = :author, content = :content, dateAdded = NOW()';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
 
         $req->bindValue(':postId', $postId, PDO::PARAM_INT);
         $req->bindValue(':author', $author, PDO::PARAM_STR);
@@ -55,11 +49,9 @@ class CommentManager extends Manager
 
     public function update(Comment $comment)
     {
-        $db = $this->dbConnect();
-
         $sql = 'UPDATE comments SET content = :content WHERE id = :id';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
         
         $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
         $req->bindValue(':content', $comment->getContent(), PDO::PARAM_STR);
@@ -68,11 +60,9 @@ class CommentManager extends Manager
 
     public function delete($id)
     {
-        $db = $this->dbConnect();
-        
         $sql = 'DELETE FROM comments WHERE id = :id';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
         
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
@@ -80,24 +70,19 @@ class CommentManager extends Manager
 
     public function flag($id)
     {
-        $db = $this->dbConnect();
-
         $sql = 'UPDATE comments SET flag = 1 WHERE id = :id';
         
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
 
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
-
     }
     
     public function unflag($id)
     {
-        $db = $this->dbConnect();
-
         $sql = 'UPDATE comments SET flag = 0 WHERE id = :id';
         
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
 
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
@@ -105,11 +90,9 @@ class CommentManager extends Manager
 
     public function getFlagged()
     {
-        $db = $this->dbConnect();
-
         $sql = 'SELECT * FROM comments WHERE flag > 0';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
         $req->execute();
 
         $req->setFetchMode(PDO::FETCH_CLASS, 'Comment');

@@ -7,8 +7,6 @@ class PostManager extends Manager
 {
     public function getPosts($limit = -1, $offset = -1)
     {
-        $db = $this->dbConnect();
-
         $sql = 'SELECT id, title, content, dateAdded, dateModified FROM posts';
 
         if ($limit != -1 || $offset != -1)
@@ -16,7 +14,7 @@ class PostManager extends Manager
             $sql .= ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset;
         }
 
-        $req = $db->query($sql);
+        $req = $this->db->query($sql);
         
         $posts = $req->fetchAll(PDO::FETCH_CLASS, 'Post');
 
@@ -25,11 +23,9 @@ class PostManager extends Manager
 
     public function getSingle($id)
     {
-        $db = $this->dbConnect();
-
         $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id = :id';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
         
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
@@ -42,11 +38,9 @@ class PostManager extends Manager
 
     public function add($title, $content)
     {
-        $db = $this->dbConnect();
-
         $sql = 'INSERT INTO posts SET title = :title, content = :content, dateAdded = NOW()';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
 
         $req->bindValue(':title', $title, PDO::PARAM_STR);
         $req->bindValue(':content', $content, PDO::PARAM_STR);
@@ -55,26 +49,21 @@ class PostManager extends Manager
 
     public function update(Post $post)
     {
-        $db = $this->dbConnect();
-
         $sql = 'UPDATE posts SET title = :title, content = :content, dateModified = NOW() WHERE id = :id';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
         
         $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
         $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
         $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
         $req->execute();
-
     }
 
     public function delete($id)
     {
-        $db = $this->dbConnect();
-        
         $sql = 'DELETE FROM posts WHERE id = :id';
 
-        $req = $db->prepare($sql);
+        $req = $this->db->prepare($sql);
         
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
