@@ -15,6 +15,13 @@
 
 <body>
     <main class="container">
+        <?php
+        if (isset($_SESSION['flash']))
+        {
+            echo '<div class="alert alert-success">' . $_SESSION['flash'] . '</div>';
+            unset($_SESSION['flash']);
+        }
+        ?>
         <?= $content ?> 
     </main>
 </body>

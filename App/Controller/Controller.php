@@ -35,6 +35,8 @@ class Controller
     {
         $this->commentManager->add($postId, $author, $content);
 
+        $_SESSION['flash'] = 'Commentaire ajouté';
+
         header('Location: index.php?action=post&id=' . $postId);
     }
 
@@ -56,6 +58,10 @@ class Controller
     public function addPost($title, $content)
     {
         $this->postManager->add($title, $content);
+
+        $_SESSION['flash'] = 'Post ajouté';
+
+        header('Location: index.php?action=admin');
     }
 
     public function updatePost($postId)
@@ -73,6 +79,10 @@ class Controller
         ));
 
         $this->postManager->update($post);
+
+        $_SESSION['flash'] = 'Post mis à jour';
+
+        header('Location: index.php?action=admin');
     }
 
     public function deletePost($id)
@@ -83,6 +93,12 @@ class Controller
     public function flagComment($id)
     {
         $this->commentManager->flag($id);
+
+        $comment = $this->commentManager->getSingle($id);
+
+        $_SESSION['flash'] = 'Commentaire signalé';
+
+        header('Location: index.php?action=post&id=' . $comment->getPostId());
     }
 
     public function adminPanel()
@@ -99,5 +115,7 @@ class Controller
     public function unflagComment($id)
     {
         $this->commentManager->unflag($id);
+
+        header('Location: index.php?action=admin');
     }
 }

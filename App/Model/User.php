@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once('App/Model/Entity.php');
 
 class User extends Entity

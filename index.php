@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once('App/Controller/Controller.php');
 
 $controller = new Controller();
