@@ -5,9 +5,11 @@ require_once('App/Controller/Controller.php');
 require_once('App/Router/Route.php');
 require_once('App/Router/Router.php');
 require_once('App/Router/Authenticate.php');
+require_once('App/Router/HTTPRequest.php');
 
 $router = new Router();
 $controller = new Controller();
+$httpRequest= new HTTPRequest();
 
 $router->addRoute(new Route(
     [
@@ -150,7 +152,7 @@ $router->addRoute(new Route(
 ));
 
 try {
-    $route = $router->getRoute($_SERVER['REQUEST_URI']);
+    $route = $router->getRoute($httpRequest->getURI());
 }
 catch (Exception $e)
 {
@@ -169,4 +171,4 @@ $urlvars = array_slice($urlvars, 2);
 $_GET = array_combine($route->getVars(), $urlvars);
 
 $action = $route->getAction();
-$controller->$action();
+$controller->$action($httpRequest);
