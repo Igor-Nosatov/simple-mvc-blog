@@ -8,7 +8,7 @@ foreach ($posts as $post):
 ?>
     <article class="post">
         <header class="post-header">
-            <a href="index.php?action=post&id=<?= $post->getId() ?>">
+            <a href="/post/<?= $post->getId() ?>">
                 <h3 class="post-heading">
                     <?= $post->getTitle() ?>
                 </h3>

@@ -3,7 +3,7 @@ $title = 'Nouveau post';
 ob_start(); 
 ?>
 
-<form action="index.php?action=addPost" method="post">
+<form action="/addPost" method="post">
     <input type="text" name="title" id="title" placeholder="Titre">
     <textarea name="content" id="content" cols="30" rows="10"></textarea>
     <input type="submit" value="Valider">

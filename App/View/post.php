@@ -24,14 +24,14 @@ ob_start();
                 </h4>
             </header>
             <?= nl2br(htmlspecialchars($comment->getContent())) ?>
-            <a href="index.php?action=flagComment&id=<?= $comment->getId() ?>">Signaler</a>
+            <a href="/flagComment/<?= $comment->getId() ?>">Signaler</a>
         </article>
     <?php
     endforeach;
     ?>
 
     <h4>Ajouter un commentaire</h4>
-    <form action="index.php?action=addComment&id=<?= $post->getId() ?>" method="post" class="comment-form">
+    <form action="/addComment/<?= $post->getId() ?>" method="post" class="comment-form">
         <div class="form-group">
             <label for="author">Nom</label>
             <input type="text" name="author" id="author" class="form-control">

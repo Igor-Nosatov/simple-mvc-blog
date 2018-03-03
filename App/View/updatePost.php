@@ -3,7 +3,7 @@ $title = 'Modifier le post';
 ob_start(); 
 ?>
 
-<form action="index.php?action=executeUpdatePost&id=<?= $post->getId() ?>" method="post">
+<form action="/executeUpdatePost/<?= $post->getId() ?>" method="post">
     <input type="text" name="title" id="title" value="<?= $post->getTitle() ?>">
     <textarea name="content" id="content" cols="30" rows="10"><?= $post->getContent() ?></textarea>
     <input type="submit" value="Valider">

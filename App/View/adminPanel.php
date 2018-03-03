@@ -3,7 +3,7 @@ $title = 'Admin';
 ob_start(); 
 ?>
 
-<a href="index.php?action=writePost">Ajouter un post</a>
+<a href="/writePost">Ajouter un post</a>
 
 <section>
     <h3>Commentaires signalés</h4>
@@ -16,8 +16,8 @@ ob_start();
             </header>
             <p><?= $flaggedComment->getContent() ?></p>
             <footer>
-                <a href="index.php?action=unflagComment&id=<?= $flaggedComment->getId() ?>">Ignorer</a>
-                <a href="index.php?action=deleteComment&id=<?= $flaggedComment->getId() ?>">Supprimer</a>
+                <a href="/unflagComment/<?= $flaggedComment->getId() ?>">Ignorer</a>
+                <a href="/deleteComment/<?= $flaggedComment->getId() ?>">Supprimer</a>
             </footer>
         </article>
     <?php

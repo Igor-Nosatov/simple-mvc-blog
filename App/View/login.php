@@ -3,7 +3,7 @@ $title = 'login';
 ob_start(); 
 ?>
 
-<form action="index.php?action=authenticate" method="post" class="login-form">
+<form action="/authenticate" method="post" class="login-form">
     <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
         <input type="text" name="username" id="username" class="form-control">
