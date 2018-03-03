@@ -6,10 +6,12 @@ require_once('App/Router/Route.php');
 require_once('App/Router/Router.php');
 require_once('App/Router/Authenticate.php');
 require_once('App/Router/HTTPRequest.php');
+require_once('App/Router/HTTPResponse.php');
 
 $router = new Router();
 $controller = new Controller();
 $httpRequest= new HTTPRequest();
+$httpResponse = new HTTPResponse();
 
 $router->addRoute(new Route(
     [
@@ -162,7 +164,7 @@ catch (Exception $e)
 if (!empty($middleware = $route->getMiddleware()))
 {
     $middleware = new $middleware();
-    $middleware($route->getUrl());
+    $middleware($route->getUrl(), $httpResponse);
 }
 
 $urlvars = explode('/', $_SERVER['REQUEST_URI']);
