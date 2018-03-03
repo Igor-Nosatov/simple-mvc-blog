@@ -69,7 +69,7 @@ catch (Exception $e)
 if (!empty($middleware = $route->getMiddleware()))
 {
     $middleware = new $middleware();
-    $middleware();
+    $middleware($route->getUrl());
 }
 
 $urlvars = explode('/', $_SERVER['REQUEST_URI']);
