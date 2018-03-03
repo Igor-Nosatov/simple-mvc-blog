@@ -35,15 +35,15 @@ class CommentManager extends Manager
         return $comment;
     }
 
-    public function add($postId, $author, $content)
+    public function add(Comment $comment)
     {
         $sql = 'INSERT INTO comments SET postId = :postId, author = :author, content = :content, dateAdded = NOW()';
 
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':postId', $postId, PDO::PARAM_INT);
-        $req->bindValue(':author', $author, PDO::PARAM_STR);
-        $req->bindValue(':content', $content, PDO::PARAM_STR);
+        $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
+        $req->bindValue(':author', $comment->getAuthor(), PDO::PARAM_STR);
+        $req->bindValue(':content', $comment->getContent(), PDO::PARAM_STR);
         $req->execute();
     }
 
