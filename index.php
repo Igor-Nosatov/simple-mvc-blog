@@ -93,10 +93,12 @@ $router->addRoute(new Route(
 
 $router->addRoute(new Route(
     [
-        'url' => '/executeUpdatePost',
+        'url' => '/executeUpdatePost/[0-9]+',
         'action' => 'executeUpdatePost',
         'middleware' => 'Authenticate',
-        'vars' => []
+        'vars' => [
+            'id'
+        ]
     ]
 ));
 

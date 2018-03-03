@@ -79,9 +79,9 @@ class Controller
         header('Location: /admin');
     }
 
-    public function updatePost($postId)
+    public function updatePost(HTTPRequest $req)
     {
-        $post = $this->postManager->getSingle($postId);
+        $post = $this->postManager->getSingle($req->getData('id'));
         require('App/View/updatePost.php');
     }
 
@@ -111,7 +111,7 @@ class Controller
 
         $this->commentManager->flag($id);
 
-        $comment = $this->commentManager->getSingle($id);
+        $comment = $this->commentManager->getSingle($req->getData('id'));
 
         $_SESSION['flash'] = 'Commentaire signalé';
 
