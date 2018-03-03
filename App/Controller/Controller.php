@@ -24,31 +24,34 @@ class Controller
         require('App/View/listPosts.php');
     }
 
-    public function post()
+    public function post(HTTPRequest $req)
     {
-        $post = $this->postManager->getSingle($_GET['id']);
-        $comments = $this->commentManager->getComments($_GET['id']);
+        $post = $this->postManager->getSingle($req->getData('id'));
+        $comments = $this->commentManager->getComments($req->getData('id'));
 
         require('App/View/post.php');
     }
 
-    public function addComment($postId, $author, $content)
+    public function addComment(HTTPRequest $req)
     {
         $comment = new Comment([
-            'postId' => $postId,
-            'author' => $author,
-            'content' => $content
+            'postId' => $req->getData('id'),
+            'author' => $req->postData('author'),
+            'content' => $req->postData('content')
         ]);
 
         $this->commentManager->add($comment);
 
         $_SESSION['flash'] = 'Commentaire ajouté';
 
-        header('Location: index.php?action=post&id=' . $postId);
+        header('Location: /post/' . $req->getData('id'));
     }
 
-    public function authenticate($username, $password)
+    public function authenticate(HTTPRequest $req)
     {
+        $username = $req->postData('username');
+        $password = $req->postData('password');
+
         $user = $this->userManager->get($username, $password);
 
         if(!$user || !password_verify($password, $user->getPassword()))
@@ -58,22 +61,22 @@ class Controller
         else
         {
             $user->login();
-            header('Location: index.php?action=admin');
+            header('Location: /admin');
         }
     }
 
-    public function addPost($title, $content)
+    public function addPost(HTTPRequest $req)
     {
         $post = new Post([
-            'title' => $title,
-            'content' => $content
+            'title' => $req->postData('title'),
+            'content' => $req->postData('content')
         ]);
 
         $this->postManager->add($post);
 
         $_SESSION['flash'] = 'Post ajouté';
 
-        header('Location: index.php?action=admin');
+        header('Location: /admin');
     }
 
     public function updatePost($postId)
@@ -82,35 +85,37 @@ class Controller
         require('App/View/updatePost.php');
     }
 
-    public function executeUpdatePost($postId, $title, $content)
+    public function executeUpdatePost(HTTPRequest $req)
     {
         $post = new Post([
-            'id' => $postId,
-            'title' => $title,
-            'content' => $content
+            'id' => $req->getData('id'),
+            'title' => $req->postData('title'),
+            'content' => $req->postData('content')
         ]);
 
         $this->postManager->update($post);
 
         $_SESSION['flash'] = 'Post mis à jour';
 
-        header('Location: index.php?action=admin');
+        header('Location: /admin');
     }
 
-    public function deletePost($id)
+    public function deletePost(HTTPRequest $req)
     {
-        $this->postManager->delete($id);
+        $this->postManager->delete($req->getData('id'));
     }
 
-    public function flagComment($id)
+    public function flagComment(HTTPRequest $req)
     {
+        $id = $req->getData('id');
+
         $this->commentManager->flag($id);
 
         $comment = $this->commentManager->getSingle($id);
 
         $_SESSION['flash'] = 'Commentaire signalé';
 
-        header('Location: index.php?action=post&id=' . $comment->getPostId());
+        header('Location: /post/' . $comment->getPostId());
     }
 
     public function adminPanel()
@@ -119,15 +124,20 @@ class Controller
         require('App/View/adminPanel.php');
     }
 
-    public function deleteComment($id)
+    public function deleteComment(HTTPRequest $req)
     {
-        $this->commentManager->delete($id);
+        $this->commentManager->delete($req->getData('id'));
     }
 
-    public function unflagComment($id)
+    public function unflagComment(HTTPRequest $req)
     {
-        $this->commentManager->unflag($id);
+        $this->commentManager->unflag($req->getData('id'));
 
-        header('Location: index.php?action=admin');
+        header('Location: /admin');
+    }
+
+    public function login()
+    {
+        require('App/View/login.php');
     }
 }
