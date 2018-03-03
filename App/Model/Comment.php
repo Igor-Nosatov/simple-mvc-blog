@@ -37,7 +37,9 @@ class Comment extends Entity
 
     public function setPostId($postId)
     {
-        if ($id > 0 && is_int($postId))
+        $postId = (int) $postId;
+
+        if ($postId > 0)
         {
             $this->postId = $postId;
         }
