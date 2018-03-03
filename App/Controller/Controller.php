@@ -140,4 +140,9 @@ class Controller
     {
         require('App/View/login.php');
     }
+
+    public function writePost()
+    {
+        require('App/View/writePost.php');
+    }
 }
