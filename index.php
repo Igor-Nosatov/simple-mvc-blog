@@ -2,116 +2,80 @@
 session_start();
 
 require_once('App/Controller/Controller.php');
+require_once('App/Router/Route.php');
+require_once('App/Router/Router.php');
+require_once('App/Router/Authenticate.php');
 
+$router = new Router();
 $controller = new Controller();
 
-try
-{
-    if (isset($_GET['action']))
-    {
-        if ($_GET['action'] == 'listPosts')
-        {
-            $controller->listPosts();
-        }
-        else if($_GET['action'] == 'post')
-        {
-            if (isset($_GET['id']) && $_GET['id'] > 0)
-            {
-                $controller->post();
-            }
-        }
-        else if ($_GET['action'] == 'addComment')
-        {
-            if (!empty($_POST['author']) && !empty($_POST['content']))
-            {
-                $controller->addComment($_GET['id'], $_POST['author'], $_POST['content']);
-            }
-            else
-            {
-                throw new Exception('Tous les champs ne sont pas remplis');
-            }
-        }
-        else if ($_GET['action'] == 'authenticate')
-        {
-            if (!empty($_POST['username'] && !empty($_POST['password'])))
-            {
-                $controller->authenticate($_POST['username'], $_POST['password']);
-            }
-        }
-        else if ($_GET['action'] == 'admin')
-        {
-            if (!isset($_SESSION['id']))
-            {
-                require('App/View/login.php');
-            }
-            else
-            {
-                $controller->adminPanel();
-            }
-        }
-        else if( $_GET['action'] == 'flagComment')
-        {
-            if (isset($_GET['id']) && $_GET['id'] > 0)
-            {
-                $controller->flagComment($_GET['id']);
-            }
-        }
-        else if (isset($_SESSION['id']))
-        {
-            if($_GET['action'] == 'writePost')
-            {
-                require('App/View/writePost.php');
-            }
-            else if($_GET['action'] == 'addPost')
-            {
-                if(!empty($_POST['title']) && !empty($_POST['content']))
-                {
-                    $controller->addPost($_POST['title'], $_POST['content']);
-                }
-            }
-            else if($_GET['action'] == 'updatePost')
-            {
-                if (isset($_GET['id']) && $_GET['id'] > 0)
-                {
-                    $controller->updatePost($_GET['id']);
-                }
-            }
-            else if($_GET['action'] == 'executeUpdatePost')
-            {
-                if (isset($_GET['id']) && $_GET['id'] > 0)
-                {
-                    $controller->executeUpdatePost($_GET['id'], $_POST['title'], $_POST['content']);
-                }
-            }
-            else if($_GET['action'] == 'deletePost')
-            {
-                if (isset($_GET['id']) && $_GET['id'] > 0)
-                {
-                    $controller->deletePost($_GET['id']);
-                }
-            }
-            else if($_GET['action'] == 'deleteComment')
-            {
-                if (isset($_GET['id']) && $_GET['id'] > 0)
-                {
-                    $controller->deleteComment($_GET['id']);
-                }
-            }
-            else if($_GET['action'] == 'unflagComment')
-            {
-                if (isset($_GET['id']) && $_GET['id'] > 0)
-                {
-                    $controller->unflagComment($_GET['id']);
-                }
-            }
-        }
-    }
-    else
-    {
-        $controller->listPosts();
-    }
+$router->addRoute(new Route(
+    [
+        'url' => '/',
+        'action' => 'listPosts',
+        'middleware' => '',
+        'vars' => []
+    ]
+));
+
+$router->addRoute(new Route(
+    [
+        'url' => '/post/[0-9]+',
+        'action' => 'post',
+        'middleware' => '',
+        'vars' => [
+            'id'
+        ]
+    ]
+));
+
+$router->addRoute(new Route(
+    [
+        'url' => '/admin',
+        'action' => 'adminPanel',
+        'middleware' => 'Authenticate',
+        'vars' => []
+    ]
+));
+
+$router->addRoute(new Route(
+    [
+        'url' => '/login',
+        'action' => 'login',
+        'middleware' => '',
+        'vars' => []
+    ]
+));
+
+$router->addRoute(new Route(
+    [
+        'url' => '/addComment/[0-9]+',
+        'action' => 'addComment',
+        'middleware' => '',
+        'vars' => [
+            'id'
+        ]
+    ]
+));
+
+try {
+    $route = $router->getRoute($_SERVER['REQUEST_URI']);
 }
 catch (Exception $e)
 {
     echo $e;
 }
+
+if (!empty($middleware = $route->getMiddleware()))
+{
+    $middleware = new $middleware();
+    $middleware();
+}
+
+$urlvars = explode('/', $_SERVER['REQUEST_URI']);
+$urlvars = array_slice($urlvars, 2);
+
+$_GET = array_combine($route->getVars(), $urlvars);
+
+$action = $route->getAction();
+$controller->$action();
