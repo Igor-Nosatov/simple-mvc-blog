@@ -4,6 +4,7 @@ require_once('App/Model/PostManager.php');
 require_once('App/Model/CommentManager.php');
 require_once('App/Model/UserManager.php');
 require_once('App/Model/Post.php');
+require_once('App/Model/Comment.php');
 
 class Controller
 {
@@ -33,7 +34,13 @@ class Controller
 
     public function addComment($postId, $author, $content)
     {
-        $this->commentManager->add($postId, $author, $content);
+        $comment = new Comment([
+            'postId' => $postId,
+            'author' => $author,
+            'content' => $content
+        ]);
+
+        $this->commentManager->add($comment);
 
         $_SESSION['flash'] = 'Commentaire ajouté';
 
@@ -57,7 +64,12 @@ class Controller
 
     public function addPost($title, $content)
     {
-        $this->postManager->add($title, $content);
+        $post = new Post([
+            'title' => $title,
+            'content' => $content
+        ]);
+
+        $this->postManager->add($post);
 
         $_SESSION['flash'] = 'Post ajouté';
 
@@ -72,11 +84,11 @@ class Controller
 
     public function executeUpdatePost($postId, $title, $content)
     {
-        $post = new Post(array(
+        $post = new Post([
             'id' => $postId,
             'title' => $title,
             'content' => $content
-        ));
+        ]);
 
         $this->postManager->update($post);
 
