@@ -14,7 +14,19 @@
 </head>
 
 <body>
-    <main class="container">
+    <header>
+        <nav class="navbar navbar-expand-md bg-light d-flex justify-content-between">
+        <a class="navbar-brand" href="/">Blog</a>
+        <?php
+        if (isset($_SESSION['id'])):
+        ?>
+            <a href="/admin">Espace d'administration</a>
+        <?php
+        endif;
+        ?>
+        </nav>
+    </header>
+    <main class="container bg-light my-4">
         <?php
         if (isset($_SESSION['flash']))
         {
