@@ -61,7 +61,7 @@ class Controller
 
         if(!$user || !password_verify($password, $user->getPassword()))
         {
-            throw new Exception('Login ou mot de passe invalide');
+            throw new \Exception('Login ou mot de passe invalide');
         }
         else
         {

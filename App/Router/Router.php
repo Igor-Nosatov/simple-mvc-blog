@@ -24,6 +24,6 @@ class router
                 return $route;
             }
         }
-        throw new Exception('No route');
+        throw new \Exception('No route');
     }
 }

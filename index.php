@@ -67,7 +67,7 @@ $router->addRoute(new Route(
 $router->addRoute(new Route(
     [
         'url' => '/authenticate',
-        'action' => '\App\Router\Authenticate',
+        'action' => 'authenticate',
         'middleware' => '',
         'vars' => []
     ]
@@ -160,7 +160,7 @@ $router->addRoute(new Route(
 try {
     $route = $router->getRoute($httpRequest->getURI());
 }
-catch (Exception $e)
+catch (\Exception $e)
 {
     echo $e;
 }

@@ -11,10 +11,10 @@ class UserManager extends Manager
 
         $req = $this->db->prepare($sql);
         
-        $req->bindValue(':username', $username, PDO::PARAM_STR);
+        $req->bindValue(':username', $username, \PDO::PARAM_STR);
         $req->execute();
 
-        $req->setFetchMode(PDO::FETCH_CLASS, 'User');
+        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\User');
         $user = $req->fetch();
 
         return $user; 
