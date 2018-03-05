@@ -162,7 +162,10 @@ try {
 }
 catch (\Exception $e)
 {
-    echo $e;
+    if ($e->getCode() == '404')
+    {
+        $httpResponse->redirect404();
+    }
 }
 
 if (!empty($middleware = $route->getMiddleware()))

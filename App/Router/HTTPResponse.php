@@ -8,4 +8,11 @@ class HTTPResponse
         header('Location: ' . $location);
         exit;
     }
+
+    public function redirect404()
+    {
+        header('HTTP/1.0 404 Not Found');
+        require('App/View/404.php');
+        exit;
+    }
 }
