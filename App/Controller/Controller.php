@@ -22,9 +22,25 @@ class Controller
         $this->userManager = new \App\Model\UserManager();
     }
 
-    public function listPosts()
+    public function listPosts(HTTPRequest $req)
     {
-        $posts = $this->postManager->getPosts();
+        // Posts per page
+        $limit = 5;
+
+        if ($page = $req->getData('page'))
+        {
+            $offset = $limit * ($page - 1);
+        }
+        else
+        {
+            $page = 1;
+            $offset = 0;
+        }
+
+        $postsTotal = $this->postManager->count();
+        $pagesTotal = ceil($postsTotal / $limit);
+
+        $posts = $this->postManager->getPosts($limit, $offset);
 
         require('App/View/listPosts.php');
     }

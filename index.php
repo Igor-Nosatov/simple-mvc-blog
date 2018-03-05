@@ -157,6 +157,17 @@ $router->addRoute(new Route(
     ]
 ));
 
+$router->addRoute(new Route(
+    [
+        'url' => '/posts/[0-9]+',
+        'action' => 'listPosts',
+        'middleware' => '',
+        'vars' => [
+            'page'
+        ]
+    ]
+));
+
 try {
     $route = $router->getRoute($httpRequest->getURI());
 }

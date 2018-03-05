@@ -69,4 +69,15 @@ class PostManager extends Manager
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
     }
+
+    public function count()
+    {
+        $sql = 'SELECT COUNT(*) FROM posts';
+
+        $req = $this->db->query($sql);
+
+        $rows = $req->fetchColumn();
+
+        return $rows; 
+    }
 }
