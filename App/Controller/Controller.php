@@ -1,4 +1,5 @@
 <?php
+namespace App\Controller;
 
 require_once('App/Model/PostManager.php');
 require_once('App/Model/CommentManager.php');
@@ -6,15 +7,19 @@ require_once('App/Model/UserManager.php');
 require_once('App/Model/Post.php');
 require_once('App/Model/Comment.php');
 
+use \App\Model\Post;
+use \App\Model\Comment;
+use \App\Router\HTTPRequest;
+
 class Controller
 {
     private $postManager;
 
     public function __construct()
     {
-        $this->postManager = new PostManager();
-        $this->commentManager = new CommentManager();
-        $this->userManager = new UserManager();
+        $this->postManager = new \App\Model\PostManager();
+        $this->commentManager = new \App\Model\CommentManager();
+        $this->userManager = new \App\Model\UserManager();
     }
 
     public function listPosts()

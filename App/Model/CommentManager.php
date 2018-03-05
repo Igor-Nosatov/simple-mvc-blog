@@ -1,4 +1,5 @@
 <?php
+namespace App\Model;
 
 require_once('App/Model/Manager.php');
 require_once('App/Model/Comment.php');
@@ -11,10 +12,10 @@ class CommentManager extends Manager
 
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':postId', $postId, PDO::PARAM_INT);
+        $req->bindValue(':postId', $postId, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(PDO::FETCH_CLASS, 'Comment');
+        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Comment');
         $comments = $req->fetchAll();
 
         return $comments;
@@ -26,10 +27,10 @@ class CommentManager extends Manager
 
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(PDO::FETCH_CLASS, 'Comment');
+        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Comment');
         $comment = $req->fetch();
 
         return $comment;
@@ -41,9 +42,9 @@ class CommentManager extends Manager
 
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
-        $req->bindValue(':author', $comment->getAuthor(), PDO::PARAM_STR);
-        $req->bindValue(':content', $comment->getContent(), PDO::PARAM_STR);
+        $req->bindValue(':postId', $comment->getPostId(), \PDO::PARAM_INT);
+        $req->bindValue(':author', $comment->getAuthor(), \PDO::PARAM_STR);
+        $req->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -53,8 +54,8 @@ class CommentManager extends Manager
 
         $req = $this->db->prepare($sql);
         
-        $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
-        $req->bindValue(':content', $comment->getContent(), PDO::PARAM_STR);
+        $req->bindValue(':id', $comment->getId(), \PDO::PARAM_INT);
+        $req->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -64,7 +65,7 @@ class CommentManager extends Manager
 
         $req = $this->db->prepare($sql);
         
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
     }
 
@@ -74,7 +75,7 @@ class CommentManager extends Manager
         
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
     }
     
@@ -84,7 +85,7 @@ class CommentManager extends Manager
         
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
     }
 
@@ -95,7 +96,7 @@ class CommentManager extends Manager
         $req = $this->db->prepare($sql);
         $req->execute();
 
-        $req->setFetchMode(PDO::FETCH_CLASS, 'Comment');
+        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Comment');
         $comments = $req->fetchAll();
 
         return $comments;

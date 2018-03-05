@@ -1,4 +1,5 @@
 <?php
+namespace App\Model;
 
 require_once('App/Model/Manager.php');
 require_once('App/Model/Post.php');
@@ -16,7 +17,7 @@ class PostManager extends Manager
 
         $req = $this->db->query($sql);
         
-        $posts = $req->fetchAll(PDO::FETCH_CLASS, 'Post');
+        $posts = $req->fetchAll(\PDO::FETCH_CLASS, '\App\Model\Post');
 
         return $posts;
     }
@@ -27,10 +28,10 @@ class PostManager extends Manager
 
         $req = $this->db->prepare($sql);
         
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(PDO::FETCH_CLASS, 'Post');
+        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Post');
         $post = $req->fetch();
 
         return $post;
@@ -42,8 +43,8 @@ class PostManager extends Manager
 
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
-        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
+        $req->bindValue(':title', $post->getTitle(), \PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), \PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -53,9 +54,9 @@ class PostManager extends Manager
 
         $req = $this->db->prepare($sql);
         
-        $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
-        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
-        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
+        $req->bindValue(':id', $post->getId(), \PDO::PARAM_INT);
+        $req->bindValue(':title', $post->getTitle(), \PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), \PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -65,7 +66,7 @@ class PostManager extends Manager
 
         $req = $this->db->prepare($sql);
         
-        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
     }
 }

@@ -8,10 +8,12 @@ require_once('App/Router/Authenticate.php');
 require_once('App/Router/HTTPRequest.php');
 require_once('App/Router/HTTPResponse.php');
 
-$router = new Router();
-$controller = new Controller();
-$httpRequest= new HTTPRequest();
-$httpResponse = new HTTPResponse();
+$router = new App\Router\Router();
+$controller = new App\Controller\Controller();
+$httpRequest= new App\Router\HTTPRequest();
+$httpResponse = new App\Router\HTTPResponse();
+
+use App\Router\Route;
 
 $router->addRoute(new Route(
     [
@@ -37,7 +39,7 @@ $router->addRoute(new Route(
     [
         'url' => '/admin',
         'action' => 'adminPanel',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => []
     ]
 ));
@@ -65,7 +67,7 @@ $router->addRoute(new Route(
 $router->addRoute(new Route(
     [
         'url' => '/authenticate',
-        'action' => 'authenticate',
+        'action' => '\App\Router\Authenticate',
         'middleware' => '',
         'vars' => []
     ]
@@ -75,7 +77,7 @@ $router->addRoute(new Route(
     [
         'url' => '/addPost',
         'action' => 'addPost',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => []
     ]
 ));
@@ -84,7 +86,7 @@ $router->addRoute(new Route(
     [
         'url' => '/updatePost/[0-9]+',
         'action' => 'updatePost',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => [
             'id'
         ]
@@ -95,7 +97,7 @@ $router->addRoute(new Route(
     [
         'url' => '/executeUpdatePost/[0-9]+',
         'action' => 'executeUpdatePost',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => [
             'id'
         ]
@@ -106,7 +108,7 @@ $router->addRoute(new Route(
     [
         'url' => '/deletePost/[0-9]+',
         'action' => 'deletePost',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => [
             'id'
         ]
@@ -128,7 +130,7 @@ $router->addRoute(new Route(
     [
         'url' => '/deleteComment/[0-9]+',
         'action' => 'deleteComment',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => [
             'id'
         ]
@@ -139,7 +141,7 @@ $router->addRoute(new Route(
     [
         'url' => '/unflagComment/[0-9]+',
         'action' => 'unflagComment',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => [
             'id'
         ]
@@ -150,7 +152,7 @@ $router->addRoute(new Route(
     [
         'url' => '/writePost',
         'action' => 'writePost',
-        'middleware' => 'Authenticate',
+        'middleware' => '\App\Router\Authenticate',
         'vars' => []
     ]
 ));
