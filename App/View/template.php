@@ -26,7 +26,7 @@
         ?>
         </nav>
     </header>
-    <main class="container bg-light my-4">
+    <main class="container bg-white my-4">
         <?php
         if (isset($_SESSION['flash']))
         {

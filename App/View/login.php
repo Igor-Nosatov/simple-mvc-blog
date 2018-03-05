@@ -3,6 +3,8 @@ $title = 'login';
 ob_start(); 
 ?>
 
+<h1 class="mb-4">Connexion</h1>
+
 <form action="/authenticate" method="post" class="login-form">
     <div class="form-group">
         <label for="username">Nom d'utilisateur</label>

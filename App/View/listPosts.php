@@ -6,7 +6,7 @@ ob_start();
 <?php
 foreach ($posts as $post):
 ?>
-    <article class="post">
+    <article class="post mb-4 p-4 bg-light">
         <header class="post-header">
             <a href="/post/<?= $post->getId() ?>">
                 <h3 class="post-heading">

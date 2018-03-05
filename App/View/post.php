@@ -3,7 +3,7 @@ $title = 'blog';
 ob_start(); 
 ?>
 
-<article class="post--single">
+<article class="post--single bg-light p-4 mb-4">
     <header class="post-header">
         <h3 class="post-heading">
             <?= $post->getTitle() ?>
@@ -12,23 +12,20 @@ ob_start();
     <?= $post->getContent() ?>
 </article>
 
-<section>
-    <h4>Commentaires</h4>
-    <?php
-    foreach ($comments as $comment):
-    ?>
-        <article class="comment">
+<section class="bg-light p-4">
+    <h4>Commentaires</h5>
+
+    <?php foreach ($comments as $comment): ?>
+        <article class="comment p-2 mb-2">
             <header class="comment-header">
-                <h4 class="comment-heading">
+                <h5 class="comment-heading">
                     <?= htmlspecialchars($comment->getAuthor()) ?> 
-                </h4>
+                </h5>
             </header>
             <?= nl2br(htmlspecialchars($comment->getContent())) ?>
             <a href="/flagComment/<?= $comment->getId() ?>">Signaler</a>
         </article>
-    <?php
-    endforeach;
-    ?>
+    <?php endforeach; ?>
 
     <h4>Ajouter un commentaire</h4>
     <form action="/addComment/<?= $post->getId() ?>" method="post" class="comment-form">

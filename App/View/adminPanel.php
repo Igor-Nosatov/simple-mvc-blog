@@ -3,6 +3,8 @@ $title = 'Admin';
 ob_start(); 
 ?>
 
+<h1 class="mb-4">Administration</h1>
+
 <a href="/writePost">Ajouter un post</a>
 
 <section>
