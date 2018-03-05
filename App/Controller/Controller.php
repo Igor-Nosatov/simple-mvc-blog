@@ -6,6 +6,7 @@ require_once('App/Model/CommentManager.php');
 require_once('App/Model/UserManager.php');
 require_once('App/Model/Post.php');
 require_once('App/Model/Comment.php');
+require_once('App/Model/Paginator.php');
 
 use \App\Model\Post;
 use \App\Model\Comment;
@@ -27,18 +28,13 @@ class Controller
         // Posts per page
         $limit = 5;
 
-        if ($page = $req->getData('page'))
-        {
-            $offset = $limit * ($page - 1);
-        }
-        else
-        {
-            $page = 1;
-            $offset = 0;
-        }
+        $page = $req->getData('page');
 
         $postsTotal = $this->postManager->count();
-        $pagesTotal = ceil($postsTotal / $limit);
+
+        $paginator = new \App\Model\Paginator($page, $limit, $postsTotal);
+
+        $offset = $paginator->offset();
 
         $posts = $this->postManager->getPosts($limit, $offset);
 
