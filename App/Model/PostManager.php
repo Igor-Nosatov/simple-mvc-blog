@@ -8,7 +8,7 @@ class PostManager extends Manager
 {
     public function getPosts($limit = -1, $offset = -1)
     {
-        $sql = 'SELECT id, title, content, dateAdded, dateModified FROM posts';
+        $sql = 'SELECT id, title, content, DATE_FORMAT(dateAdded, \'%d/%m/%Y\') AS dateAdded, dateModified FROM posts';
 
         if ($limit != -1 || $offset != -1)
         {
