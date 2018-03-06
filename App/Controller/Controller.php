@@ -1,13 +1,6 @@
 <?php
 namespace App\Controller;
 
-require_once('App/Model/PostManager.php');
-require_once('App/Model/CommentManager.php');
-require_once('App/Model/UserManager.php');
-require_once('App/Model/Post.php');
-require_once('App/Model/Comment.php');
-require_once('App/Model/Paginator.php');
-
 use \App\Model\Post;
 use \App\Model\Comment;
 use \App\Router\HTTPRequest;

@@ -1,12 +1,10 @@
 <?php
 session_start();
 
-require_once('App/Controller/Controller.php');
-require_once('App/Router/Route.php');
-require_once('App/Router/Router.php');
-require_once('App/Router/Authenticate.php');
-require_once('App/Router/HTTPRequest.php');
-require_once('App/Router/HTTPResponse.php');
+spl_autoload_register(function($class) {
+    $class = str_replace('\\', '/', $class);
+    require_once(__DIR__ . '/' . $class . '.php');
+});
 
 $router = new App\Router\Router();
 $controller = new App\Controller\Controller();

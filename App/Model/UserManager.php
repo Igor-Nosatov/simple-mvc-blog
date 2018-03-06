@@ -1,8 +1,6 @@
 <?php
 namespace App\Model;
 
-require_once('App/Model/User.php');
-
 class UserManager extends Manager
 {
     public function get($username, $password)

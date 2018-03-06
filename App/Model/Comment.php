@@ -1,8 +1,6 @@
 <?php
 namespace App\Model;
 
-require_once('App/Model/Entity.php');
-
 class Comment extends Entity
 {
     private $postId,

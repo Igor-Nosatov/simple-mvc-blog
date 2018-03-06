@@ -1,9 +1,6 @@
 <?php
 namespace App\Model;
 
-require_once('App/Model/Manager.php');
-require_once('App/Model/Post.php');
-
 class PostManager extends Manager
 {
     public function getPosts($limit = -1, $offset = -1)
