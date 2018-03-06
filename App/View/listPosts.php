@@ -13,8 +13,14 @@ foreach ($posts as $post):
                     <?= $post->getTitle() ?>
                 </h3>
             </a>
+            <p class="font-italic">Le <?= $post->getDateAdded() ?></p>
         </header>
-        <?= $post->getContent() ?>
+        <div class="post-content">
+            <?= $post->getContent() ?>
+        </div>
+        <footer class="post-footer d-flex justify-content-end">
+            <a href="/post/<?= $post->getId() ?>">Lire la suite</a> 
+        </footer>
     </article>
 <?php
 endforeach;

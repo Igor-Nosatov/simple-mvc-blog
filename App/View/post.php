@@ -1,5 +1,5 @@
 <?php 
-$title = 'blog';
+$title = $post->getTitle();
 ob_start(); 
 ?>
 
@@ -27,7 +27,7 @@ ob_start();
         </article>
     <?php endforeach; ?>
 
-    <h4>Ajouter un commentaire</h4>
+    <h4 class="border-top py-3">Ajouter un commentaire</h4>
     <form action="/addComment/<?= $post->getId() ?>" method="post" class="comment-form">
         <div class="form-group">
             <label for="author">Nom</label>
