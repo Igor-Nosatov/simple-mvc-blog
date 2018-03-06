@@ -16,7 +16,7 @@ foreach ($posts as $post):
             <p class="font-italic">Le <?= $post->getDateAdded() ?></p>
         </header>
         <div class="post-content">
-            <?= $post->getContent() ?>
+            <?= $post->excerpt(400) ?>
         </div>
         <footer class="post-footer d-flex justify-content-end">
             <a href="/post/<?= $post->getId() ?>">Lire la suite</a> 

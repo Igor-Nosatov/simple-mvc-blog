@@ -10,12 +10,19 @@ class Post extends Entity
             $dateAdded,
             $dateModified;
 
+    public function excerpt(int $length) : string
+    {
+        $excerpt = substr($this->content, 0, $length);
+        $excerpt .= '...';
+
+        return $excerpt;
+    }
+
     // GETTERS
     
     public function getTitle()
     {
         return $this->title;
-
     }
 
     public function getContent()
