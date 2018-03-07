@@ -17,23 +17,23 @@
     <header>
         <nav class="navbar navbar-expand-md bg-light d-flex justify-content-between">
         <a class="navbar-brand" href="/">Blog</a>
-        <?php
-        if (isset($_SESSION['id'])):
-        ?>
+        <?php if (isset($_SESSION['id'])): ?>
             <a href="/admin">Espace d'administration</a>
-        <?php
-        endif;
-        ?>
+        <?php endif; ?>
         </nav>
     </header>
+
     <main class="container bg-white my-4">
-        <?php
-        if (isset($_SESSION['flash']))
-        {
-            echo '<div class="alert alert-success">' . $_SESSION['flash'] . '</div>';
-            unset($_SESSION['flash']);
-        }
-        ?>
+        <?php if (isset($_SESSION['flash'])): ?>
+            <div class="alert alert-success alert-dismissible fade show"><?= $_SESSION['flash'] ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <?php unset($_SESSION['flash']); ?>
+        <?php endif; ?>
+
         <?= $content ?> 
     </main>
 </body>
