@@ -14,6 +14,7 @@ class Controller
         $this->postManager = new \App\Model\PostManager();
         $this->commentManager = new \App\Model\CommentManager();
         $this->userManager = new \App\Model\UserManager();
+        $this->httpResponse = new \App\Router\HTTPResponse();
     }
 
     public function listPosts(HTTPRequest $req)
@@ -30,16 +31,31 @@ class Controller
         $offset = $paginator->offset();
 
         $posts = $this->postManager->getPosts($limit, $offset);
-
-        require('App/View/listPosts.php');
+        
+        if (empty($posts))
+        {
+            $this->httpResponse->redirect404();
+        }
+        else
+        {
+            require('App/View/listPosts.php');
+        }
     }
 
     public function post(HTTPRequest $req)
     {
         $post = $this->postManager->getSingle($req->getData('id'));
-        $comments = $this->commentManager->getComments($req->getData('id'));
 
-        require('App/View/post.php');
+        if (null === $post)
+        {
+            $this->httpResponse->redirect404();
+        }
+        else
+        {
+            $comments = $this->commentManager->getComments($req->getData('id')); 
+
+            require('App/View/post.php');
+        }
     }
 
     public function addComment(HTTPRequest $req)
