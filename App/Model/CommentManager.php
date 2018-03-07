@@ -3,7 +3,7 @@ namespace App\Model;
 
 class CommentManager extends Manager
 {
-    public function getComments($postId)
+    public function getComments($postId) : array
     {
         $sql = 'SELECT id, postId, author, content, dateAdded FROM comments WHERE postId = :postId';
 
@@ -18,7 +18,7 @@ class CommentManager extends Manager
         return $comments;
     }
 
-    public function getSingle($id)
+    public function getSingle($id) : ?Comment
     {
         $sql = 'SELECT id, postId, author, content, dateAdded FROM comments WHERE id = :id';
 
@@ -30,7 +30,7 @@ class CommentManager extends Manager
         $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Comment');
         $comment = $req->fetch();
 
-        return $comment;
+        return $comment ? $comment : null;
     }
 
     public function add(Comment $comment)
@@ -86,7 +86,7 @@ class CommentManager extends Manager
         $req->execute();
     }
 
-    public function getFlagged()
+    public function getFlagged() : array
     {
         $sql = 'SELECT * FROM comments WHERE flag > 0';
 

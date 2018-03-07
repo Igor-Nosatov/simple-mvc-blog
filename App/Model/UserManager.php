@@ -3,7 +3,7 @@ namespace App\Model;
 
 class UserManager extends Manager
 {
-    public function get($username, $password)
+    public function get($username, $password) : ?User
     {
         $sql = 'SELECT id, username, password FROM users WHERE username = :username';
 
@@ -15,6 +15,6 @@ class UserManager extends Manager
         $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\User');
         $user = $req->fetch();
 
-        return $user; 
+        return $user ? $user : null;
     }
 }

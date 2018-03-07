@@ -3,7 +3,7 @@ namespace App\Model;
 
 class PostManager extends Manager
 {
-    public function getPosts($limit = -1, $offset = -1)
+    public function getPosts($limit = -1, $offset = -1) : array
     {
         $sql = 'SELECT id, title, content, DATE_FORMAT(dateAdded, \'%d/%m/%Y\') AS dateAdded, dateModified FROM posts ORDER BY dateAdded DESC';
 
@@ -19,7 +19,7 @@ class PostManager extends Manager
         return $posts;
     }
 
-    public function getSingle($id)
+    public function getSingle($id) : ?Post
     {
         $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id = :id';
 
@@ -31,7 +31,7 @@ class PostManager extends Manager
         $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Post');
         $post = $req->fetch();
 
-        return $post;
+        return $post ? $post : null;
     }
 
     public function add(Post $post)
@@ -67,13 +67,13 @@ class PostManager extends Manager
         $req->execute();
     }
 
-    public function count()
+    public function count() : int
     {
-        $sql = 'SELECT COUNT(*) FROM posts';
+        $sql = 'SELECT COUNT(id) FROM posts';
 
         $req = $this->db->query($sql);
 
-        $rows = $req->fetchColumn();
+        $rows = (int) $req->fetchColumn();
 
         return $rows; 
     }
