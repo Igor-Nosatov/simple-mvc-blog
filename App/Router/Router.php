@@ -10,12 +10,13 @@ class router
         $this->routes[] = $route;
     }
 
-    public function getRoutes()
-    {
-        return $this->routes;
-    }
-
-    public function getRoute(string $url)
+    /**
+     * Checks all the routes for one matching the url
+     *
+     * @param string $url
+     * @return Route the matching route
+     */
+    public function getRoute(string $url) : Route
     {
         foreach ($this->routes as $route)
         {

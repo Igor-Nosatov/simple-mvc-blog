@@ -1,6 +1,9 @@
 <?php
 namespace App\Router;
 
+/**
+ * Represents a single route
+ */
 class Route
 {
     private $url,
@@ -16,7 +19,13 @@ class Route
         $this->setVars($data['vars']);
     }
 
-    public function match(string $url)
+    /**
+     * Uses regex to check if the route matches the url
+     *
+     * @param string $url
+     * @return array|null
+     */
+    public function match(string $url) : ?array
     {
         if (preg_match('#^' . $this->url . '$#', $url, $matches))
         {
@@ -57,22 +66,22 @@ class Route
         $this->vars = $vars;
     }
 
-    public function getUrl()
+    public function getUrl() : string
     {
         return $this->url;
     }
 
-    public function getAction()
+    public function getAction() : string
     {
         return $this->action;
     }
 
-    public function getMiddleware()
+    public function getMiddleware() : string
     {
         return $this->middleware;
     }
 
-    public function getVars()
+    public function getVars() : array
     {
         return $this->vars;
     }
