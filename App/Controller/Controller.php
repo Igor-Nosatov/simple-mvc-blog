@@ -129,6 +129,10 @@ class Controller
     public function deletePost(HTTPRequest $req)
     {
         $this->postManager->delete($req->getData('id'));
+
+        $_SESSION['flash'] = 'Post supprimé';
+       
+        header('Location: /admin');
     }
 
     public function flagComment(HTTPRequest $req)
@@ -153,11 +157,15 @@ class Controller
     public function deleteComment(HTTPRequest $req)
     {
         $this->commentManager->delete($req->getData('id'));
+
+        $_SESSION['flash'] = 'Commentaire supprimé';
     }
 
     public function unflagComment(HTTPRequest $req)
     {
         $this->commentManager->unflag($req->getData('id'));
+        
+        $_SESSION['flash'] = 'Commentaire ignoré';
 
         header('Location: /admin');
     }
