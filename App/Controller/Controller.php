@@ -7,7 +7,11 @@ use \App\Router\HTTPRequest;
 
 class Controller
 {
-    private $postManager;
+    private $postManager,
+            $commentManager,
+            $userManager,
+            $httpResponse,
+            $flash;
 
     public function __construct()
     {
