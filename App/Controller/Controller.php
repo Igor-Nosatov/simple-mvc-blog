@@ -38,7 +38,7 @@ class Controller
         }
         else
         {
-            require('App/View/listPosts.php');
+            require('../App/View/listPosts.php');
         }
     }
 
@@ -54,7 +54,7 @@ class Controller
         {
             $comments = $this->commentManager->getComments($req->getData('id')); 
 
-            require('App/View/post.php');
+            require('../App/View/post.php');
         }
     }
 
@@ -108,7 +108,7 @@ class Controller
     public function updatePost(HTTPRequest $req)
     {
         $post = $this->postManager->getSingle($req->getData('id'));
-        require('App/View/updatePost.php');
+        require('../App/View/updatePost.php');
     }
 
     public function executeUpdatePost(HTTPRequest $req)
@@ -151,7 +151,8 @@ class Controller
     public function adminPanel()
     {
         $flaggedComments = $this->commentManager->getFlagged();
-        require('App/View/adminPanel.php');
+        $posts = $this->postManager->getPosts();
+        require('../App/View/adminPanel.php');
     }
 
     public function deleteComment(HTTPRequest $req)
@@ -172,11 +173,11 @@ class Controller
 
     public function login()
     {
-        require('App/View/login.php');
+        require('../App/View/login.php');
     }
 
     public function writePost()
     {
-        require('App/View/writePost.php');
+        require('../App/View/writePost.php');
     }
 }

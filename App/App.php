@@ -20,7 +20,7 @@ class App
     {
         session_start();
        
-        require('App/Config/routes.php');
+        require('../App/Config/routes.php');
        
         foreach ($routes as $route)
         {
