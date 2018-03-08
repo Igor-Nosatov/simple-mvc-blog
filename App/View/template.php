@@ -24,15 +24,12 @@
     </header>
 
     <main class="container bg-white my-4">
-        <?php if (isset($_SESSION['flash'])): ?>
-            <div class="alert alert-success alert-dismissible fade show"><?= $_SESSION['flash'] ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            
-            <?php unset($_SESSION['flash']); ?>
-        <?php endif; ?>
+        <?php 
+        if ($flash->hasMessage())
+        {
+            echo $flash->get();
+        }
+        ?>
 
         <?= $content ?> 
     </main>

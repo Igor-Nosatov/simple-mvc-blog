@@ -1,6 +1,5 @@
 <?php 
 $title = 'Ajouter un post';
-ob_start(); 
 ?>
 
 <h1 class="mb-4">Ajouter un post</h1>
@@ -17,8 +16,3 @@ ob_start();
 
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'textarea' });</script>
-
-<?php 
-$content = ob_get_clean();
-require('template.php');
-?>

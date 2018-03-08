@@ -1,6 +1,5 @@
 <?php 
 $title = 'login';
-ob_start(); 
 ?>
 
 <h1 class="mb-4">Connexion</h1>
@@ -16,8 +15,3 @@ ob_start();
     </div>
     <input type="submit" value="Login" class="btn btn-primary">
 </form>
-
-<?php 
-$content = ob_get_clean();
-require('template.php');
-?>

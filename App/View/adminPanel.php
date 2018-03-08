@@ -1,6 +1,5 @@
 <?php 
 $title = 'Admin';
-ob_start(); 
 ?>
 
 <h1 class="mb-4">Administration</h1>
@@ -52,8 +51,3 @@ ob_start();
         </footer>
     </article>
 <?php endforeach; ?>
-
-<?php 
-$content = ob_get_clean();
-require('template.php');
-?>

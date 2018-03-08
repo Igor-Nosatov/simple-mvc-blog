@@ -15,6 +15,20 @@ class Controller
         $this->commentManager = new \App\Model\CommentManager();
         $this->userManager = new \App\Model\UserManager();
         $this->httpResponse = new \App\Router\HTTPResponse();
+        $this->flash = new \App\Model\Flash();
+    }
+
+    private function show(string $contentFile, array $vars = [])
+    {
+        $flash = $this->flash;
+
+        extract($vars);
+
+        ob_start();
+        require($contentFile);
+        $content = ob_get_clean();
+
+        require('../App/View/template.php');
     }
 
     public function listPosts(HTTPRequest $req)
@@ -38,7 +52,7 @@ class Controller
         }
         else
         {
-            require('../App/View/listPosts.php');
+            $this->show('../App/View/listPosts.php', compact('posts', 'paginator'));
         }
     }
 
@@ -54,7 +68,7 @@ class Controller
         {
             $comments = $this->commentManager->getComments($req->getData('id')); 
 
-            require('../App/View/post.php');
+            $this->show('../App/View/post.php', compact('post', 'comments'));
         }
     }
 
@@ -68,7 +82,7 @@ class Controller
 
         $this->commentManager->add($comment);
 
-        $_SESSION['flash'] = 'Commentaire ajouté';
+        $this->flash->set('Commentaire ajouté');
 
         header('Location: /post/' . $req->getData('id'));
     }
@@ -82,7 +96,9 @@ class Controller
 
         if(!$user || !password_verify($password, $user->getPassword()))
         {
-            throw new \Exception('Login ou mot de passe invalide');
+            $this->flash->set('Login ou mot de passe invalide', 'danger');
+
+            header('Location: /login');
         }
         else
         {
@@ -100,7 +116,7 @@ class Controller
 
         $this->postManager->add($post);
 
-        $_SESSION['flash'] = 'Post ajouté';
+        $this->flash->set('Post ajouté');
 
         header('Location: /admin');
     }
@@ -108,7 +124,7 @@ class Controller
     public function updatePost(HTTPRequest $req)
     {
         $post = $this->postManager->getSingle($req->getData('id'));
-        require('../App/View/updatePost.php');
+        $this->show('../App/View/updatePost.php', compact('post'));
     }
 
     public function executeUpdatePost(HTTPRequest $req)
@@ -121,7 +137,7 @@ class Controller
 
         $this->postManager->update($post);
 
-        $_SESSION['flash'] = 'Post mis à jour';
+        $this->flash->set('Post mis à jour');
 
         header('Location: /admin');
     }
@@ -130,7 +146,7 @@ class Controller
     {
         $this->postManager->delete($req->getData('id'));
 
-        $_SESSION['flash'] = 'Post supprimé';
+        $this->flash->set('Post supprimé');
        
         header('Location: /admin');
     }
@@ -143,7 +159,7 @@ class Controller
 
         $comment = $this->commentManager->getSingle($req->getData('id'));
 
-        $_SESSION['flash'] = 'Commentaire signalé';
+        $this->flash->set('Commentaire signalé');
 
         header('Location: /post/' . $comment->getPostId());
     }
@@ -152,32 +168,32 @@ class Controller
     {
         $flaggedComments = $this->commentManager->getFlagged();
         $posts = $this->postManager->getPosts();
-        require('../App/View/adminPanel.php');
+        $this->show('../App/View/adminPanel.php', compact('flaggedComments', 'posts'));
     }
 
     public function deleteComment(HTTPRequest $req)
     {
         $this->commentManager->delete($req->getData('id'));
 
-        $_SESSION['flash'] = 'Commentaire supprimé';
+        $this->flash->set('Commentaire supprimé');
     }
 
     public function unflagComment(HTTPRequest $req)
     {
         $this->commentManager->unflag($req->getData('id'));
         
-        $_SESSION['flash'] = 'Commentaire ignoré';
+        $this->flash->set('Commentaire ignoré');
 
         header('Location: /admin');
     }
 
     public function login()
     {
-        require('../App/View/login.php');
+        $this->show('../App/View/login.php');
     }
 
     public function writePost()
     {
-        require('../App/View/writePost.php');
+        $this->show('../App/View/writePost.php');
     }
 }

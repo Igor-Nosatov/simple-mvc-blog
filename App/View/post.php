@@ -1,6 +1,5 @@
 <?php 
 $title = $post->getTitle();
-ob_start(); 
 ?>
 
 <article class="post--single bg-light p-4 mb-4">
@@ -40,8 +39,3 @@ ob_start();
         <input type="submit" value="Envoyer" class="btn btn-primary">
     </form>
 </section>
-
-<?php 
-$content = ob_get_clean();
-require('template.php');
-?>

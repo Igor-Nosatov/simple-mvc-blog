@@ -1,6 +1,5 @@
 <?php 
 $title = 'blog';
-ob_start(); 
 ?>
 
 <?php
@@ -33,8 +32,3 @@ endforeach;
         <?= $paginator->next() ?>
     </ul>
 </nav>
-
-<?php 
-$content = ob_get_clean();
-require('template.php');
-?>
