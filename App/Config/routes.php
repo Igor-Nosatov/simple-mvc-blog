@@ -114,5 +114,11 @@ $routes = [
         'action' => 'notFound',
         'middleware' => '',
         'vars' => []
+    ],
+    [
+        'url' => '/imgUploadTinyMCE',
+        'action' => 'imgUploadTinyMCE',
+        'middleware' => '\App\Router\Authenticate',
+        'vars' => []
     ]
 ];
