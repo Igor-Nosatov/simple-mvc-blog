@@ -29,7 +29,7 @@ $title = 'Admin';
                     </td>
                     <td>
                         <a href="/updatePost/<?= $post->getId() ?>" class="mr-2">Modifier</a>
-                        <a href="/deletePost/<?= $post->getId() ?>">Supprimer</a>
+                        <a data-toggle="modal" data-target="#delete-modal" class="delete-post" href="/deletePost/<?= $post->getId() ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -51,3 +51,25 @@ $title = 'Admin';
         </footer>
     </article>
 <?php endforeach; ?>
+
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Suppression du post</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Êtes vous sûr ?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <a class="btn btn-primary" id="delete" href="">Confirmer</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/confirm.js"></script>
