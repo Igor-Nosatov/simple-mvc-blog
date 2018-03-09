@@ -49,7 +49,7 @@ class Controller
         $offset = $paginator->offset();
 
         $posts = $this->postManager->getPosts($limit, $offset);
-        
+
         if (empty($posts))
         {
             $this->httpResponse->redirect404();
@@ -70,7 +70,7 @@ class Controller
         }
         else
         {
-            $comments = $this->commentManager->getComments($req->getData('id')); 
+            $comments = $this->commentManager->getComments($req->getData('id'));
 
             $this->show('../App/View/post.php', compact('post', 'comments'));
         }
@@ -84,9 +84,15 @@ class Controller
             'content' => $req->postData('content')
         ]);
 
-        $this->commentManager->add($comment);
-
-        $this->flash->set('Commentaire ajouté');
+        if($comment->hasErrors())
+        {
+            $this->flash->set('Tous les champs doivent être remplis', 'danger');
+        }
+        else
+        {
+            $this->commentManager->add($comment);
+            $this->flash->set('Commentaire ajouté');
+        }
 
         header('Location: /post/' . $req->getData('id'));
     }
@@ -151,7 +157,7 @@ class Controller
         $this->postManager->delete($req->getData('id'));
 
         $this->flash->set('Post supprimé');
-       
+
         header('Location: /admin');
     }
 
@@ -185,7 +191,7 @@ class Controller
     public function unflagComment(HTTPRequest $req)
     {
         $this->commentManager->unflag($req->getData('id'));
-        
+
         $this->flash->set('Commentaire ignoré');
 
         header('Location: /admin');

@@ -3,7 +3,8 @@ namespace App\Model;
 
 abstract class Entity
 {
-    protected $id;
+    protected $id,
+              $errors = [];
 
     public function __construct(array $data = [])
     {
@@ -25,12 +26,17 @@ abstract class Entity
             }
         }
     }
-    
+
+    public function hasErrors()
+    {
+        return !empty($this->errors);
+    }
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function setId($id)
     {
         $id = (int) $id;

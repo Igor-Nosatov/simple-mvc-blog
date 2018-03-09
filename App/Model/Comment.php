@@ -9,19 +9,21 @@ class Comment extends Entity
             $dateAdded,
             $flag;
 
+    const AUTHOR_INVALID = 1;
+    const CONTENT_INVALID = 2;
+
     // GETTERS
-    
+
     public function getPostId()
     {
         return $this->postId;
-
     }
 
     public function getAuthor()
     {
         return $this->author;
     }
-    
+
     public function getContent()
     {
         return $this->content;
@@ -31,7 +33,7 @@ class Comment extends Entity
     {
         return $this->dateAdded;
     }
-    
+
     // SETTERS
 
     public function setPostId($postId)
@@ -46,17 +48,25 @@ class Comment extends Entity
 
     public function setAuthor($author)
     {
-        if (is_string($author))
+        if (is_string($author) && !empty($author))
         {
             $this->author = $author;
+        }
+        else
+        {
+            $this->errors[] = self::AUTHOR_INVALID;
         }
     }
 
     public function setContent($content)
     {
-        if (is_string($content))
+        if (is_string($content) && !empty($content))
         {
             $this->content = $content;
+        }
+        else
+        {
+            $this->errors[] = self::CONTENT_INVALID;
         }
     }
 
