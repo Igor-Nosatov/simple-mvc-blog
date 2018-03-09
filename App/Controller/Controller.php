@@ -200,4 +200,9 @@ class Controller
     {
         $this->show('../App/View/writePost.php');
     }
+
+    public function notFound()
+    {
+        $this->show('../App/View/404.php');
+    }
 }

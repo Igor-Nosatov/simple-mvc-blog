@@ -108,5 +108,11 @@ $routes = [
         'vars' => [
             'page'
         ]
+    ],
+    [
+        'url' => '/404',
+        'action' => 'notFound',
+        'middleware' => '',
+        'vars' => []
     ]
 ];
