@@ -212,7 +212,7 @@ class Controller
         $this->show('../App/View/404.php');
     }
 
-    private function imgUploadTinyMCE()
+    public function imgUploadTinyMCE()
     {
         $accepted_origins = array("http://projet4.local");
 
