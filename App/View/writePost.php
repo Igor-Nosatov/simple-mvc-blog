@@ -4,7 +4,7 @@ $title = 'Ajouter un post';
 
 <h1 class="mb-4">Ajouter un post</h1>
 
-<form action="/addPost" method="post" class="bg-light p-4">
+<form action="/admin/addPost" method="post" class="bg-light p-4">
     <div class="form-group">
         <input type="text" name="title" id="title" placeholder="Titre" class="form-control">
     </div>

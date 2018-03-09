@@ -5,7 +5,7 @@ $title = 'Admin';
 <h1 class="mb-4">Administration</h1>
 
 <div class="row mb-4">
-    <a href="/writePost">Ajouter un post</a>
+    <a href="/admin/writePost">Ajouter un post</a>
 </div>
 
 <div class="row">
@@ -28,8 +28,8 @@ $title = 'Admin';
                         <?= $post->getDateAdded() ?>
                     </td>
                     <td>
-                        <a href="/updatePost/<?= $post->getId() ?>" class="mr-2">Modifier</a>
-                        <a data-toggle="modal" data-target="#delete-modal" class="delete-post" href="/deletePost/<?= $post->getId() ?>">Supprimer</a>
+                        <a href="/admin/updatePost/<?= $post->getId() ?>" class="mr-2">Modifier</a>
+                        <a data-toggle="modal" data-target="#delete-modal" class="delete-post" href="/admin/deletePost/<?= $post->getId() ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -46,8 +46,8 @@ $title = 'Admin';
         </header>
         <p><?= $flaggedComment->getContent() ?></p>
         <footer>
-            <a href="/unflagComment/<?= $flaggedComment->getId() ?>">Ignorer</a>
-            <a href="/deleteComment/<?= $flaggedComment->getId() ?>">Supprimer</a>
+            <a href="/admin/unflagComment/<?= $flaggedComment->getId() ?>">Ignorer</a>
+            <a href="/admin/deleteComment/<?= $flaggedComment->getId() ?>">Supprimer</a>
         </footer>
     </article>
 <?php endforeach; ?>

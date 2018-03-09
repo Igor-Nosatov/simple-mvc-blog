@@ -11,7 +11,7 @@ tinymce.init({
   // enable automatic uploads of images represented by blob or data URIs
   automatic_uploads: true,
   // URL of our upload handler (for more details check: https://www.tinymce.com/docs/configure/file-image-upload/#images_upload_url)
-  images_upload_url: '/imgUploadTinyMCE',
+  images_upload_url: '/admin/imgUploadTinyMCE',
   relative_urls : false,
   remove_script_host : false,
   document_base_url : "http://projet4.local/",
