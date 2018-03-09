@@ -20,7 +20,7 @@ class router
     {
         foreach ($this->routes as $route)
         {
-            if ($route->match($url))
+            if ($route->get($url))
             {
                 return $route;
             }

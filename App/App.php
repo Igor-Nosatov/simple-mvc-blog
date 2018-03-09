@@ -19,7 +19,7 @@ class App
     public function run()
     {
         session_start();
-       
+
         require('../App/Config/routes.php');
        
         foreach ($routes as $route)
@@ -44,10 +44,7 @@ class App
             $middleware($route->getUrl(), $this->httpResponse);
         }
 
-        $urlvars = explode('/', $this->httpRequest->getURI());
-        $urlvars = array_slice($urlvars, 2);
-
-        $_GET = array_combine($route->getVars(), $urlvars);
+        $_GET = $route->getParams();
 
         $action = $route->getAction();
         $this->controller->$action($this->httpRequest);
