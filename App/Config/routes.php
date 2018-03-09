@@ -22,7 +22,7 @@ $routes = [
         'middleware' => '',
     ],
     [
-        'url' => '/flagComment/{[0-9]+}',
+        'url' => '/flagComment/{id:[0-9]+}',
         'action' => 'flagComment',
         'middleware' => '',
     ],
