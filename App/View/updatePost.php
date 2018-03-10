@@ -9,7 +9,7 @@ $title = 'Modifier le post';
         <input type="text" name="title" id="title" value="<?= $post->getTitle() ?>" class="form-control">
     </div>
     <div class="form-group">
-        <textarea name="content" id="content" cols="30" rows="10" class="form-control"><?= $post->getContent() ?></textarea>
+        <textarea name="content" id="content" cols="30" rows="20" class="form-control"><?= $post->getContent() ?></textarea>
     </div>
     <input type="submit" value="Valider" class="btn btn-primary">
 </form>

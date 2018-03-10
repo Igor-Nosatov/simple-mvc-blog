@@ -9,7 +9,7 @@ $title = 'Ajouter un post';
         <input type="text" name="title" id="title" placeholder="Titre" class="form-control">
     </div>
     <div class="form-group">
-        <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+        <textarea name="content" id="content" cols="30" rows="20" class="form-control"></textarea>
     </div>
     <input type="submit" value="Valider" class="btn btn-primary">
 </form>

@@ -2,55 +2,65 @@
 $title = 'Admin';
 ?>
 
-<h1 class="mb-4">Administration</h1>
+<div class="admin-inner container bg-white">
+<h1 class="py-4 px-2">Administration</h1>
 
-<div class="row mb-4">
+<div class="mb-4">
     <a href="/admin/writePost">Ajouter un post</a>
 </div>
 
-<div class="row">
-    <table class="table">
-        <caption>Tous les posts</caption>
-        <thead>
+<table class="table">
+    <caption>Tous les posts</caption>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($posts as $post): ?>
             <tr>
-                <th>Titre</th>
-                <th>Date</th>
-                <th>Action</th>
+                <td>
+                    <a href="/post/<?= $post->getId() ?>"><?= $post->getTitle() ?></a>
+                </td>
+                <td>
+                    <?= $post->getDateAdded() ?>
+                </td>
+                <td>
+                    <a href="/admin/updatePost/<?= $post->getId() ?>" class="mr-2">Modifier</a>
+                    <a data-toggle="modal" data-target="#delete-modal" class="delete-post" href="/admin/deletePost/<?= $post->getId() ?>">Supprimer</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($posts as $post): ?>
-                <tr>
-                    <td>
-                        <a href="/post/<?= $post->getId() ?>"><?= $post->getTitle() ?></a>
-                    </td>
-                    <td>
-                        <?= $post->getDateAdded() ?>
-                    </td>
-                    <td>
-                        <a href="/admin/updatePost/<?= $post->getId() ?>" class="mr-2">Modifier</a>
-                        <a data-toggle="modal" data-target="#delete-modal" class="delete-post" href="/admin/deletePost/<?= $post->getId() ?>">Supprimer</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 
-<h3>Commentaires signalés</h4>
 
-<?php foreach ($flaggedComments as $flaggedComment): ?>
-    <article>
-        <header>
-            <h5><?= htmlspecialchars($flaggedComment->getAuthor()) ?></h5>
-        </header>
-        <p><?= $flaggedComment->getContent() ?></p>
-        <footer>
-            <a href="/admin/unflagComment/<?= $flaggedComment->getId() ?>">Ignorer</a>
-            <a href="/admin/deleteComment/<?= $flaggedComment->getId() ?>">Supprimer</a>
-        </footer>
-    </article>
-<?php endforeach; ?>
+<section class="comments">
+    <h3>Commentaires signalés</h3>
+    <?php if (empty($flaggedComments)): ?>
+    <p>Pas de commentaire signalé.</p>
+    <?php endif; ?>
+
+    <?php foreach ($flaggedComments as $flaggedComment): ?>
+        <article class="comment">
+            <header class="comment__header">
+                <h5 class="comment__heading">
+                    <?= htmlspecialchars($flaggedComment->getAuthor()) ?>
+                </h5>
+            </header>
+            <div class="comment__content py-2">
+                <?= $flaggedComment->getContent() ?>
+            </div>
+            <footer class="comment__footer">
+                <a class="mr-2" href="/admin/unflagComment/<?= $flaggedComment->getId() ?>">Ignorer</a>
+                <a class="mr-2" href="/admin/deleteComment/<?= $flaggedComment->getId() ?>">Supprimer</a>
+                <a href="/post/<?= $flaggedComment->getPostId() ?>">Lien vers le post</a>
+            </footer>
+        </article>
+    <?php endforeach; ?>
+</section>
 
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -70,6 +80,7 @@ $title = 'Admin';
         </div>
         </div>
     </div>
+</div>
 </div>
 
 <script src="js/confirm.js"></script>
