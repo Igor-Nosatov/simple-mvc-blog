@@ -85,5 +85,15 @@ $routes = [
         'url' => '/admin/imgUploadTinyMCE',
         'action' => 'imgUploadTinyMCE',
         'middleware' => '\App\Router\Authenticate',
+    ],
+    [
+        'url' => '/admin/changePassword',
+        'action' => 'changePassword',
+        'middleware' => '\App\Router\Authenticate',
+    ],
+    [
+        'url' => '/admin/executeChangePassword',
+        'action' => 'executeChangePassword',
+        'middleware' => '\App\Router\Authenticate',
     ]
 ];

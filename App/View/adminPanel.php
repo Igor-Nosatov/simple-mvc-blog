@@ -7,6 +7,7 @@ $title = 'Admin';
 
 <div class="mb-4">
     <a href="/admin/writePost">Ajouter un post</a>
+    <a href="/admin/changePassword">Changer de mot de passe</a>
 </div>
 
 <table class="table">
