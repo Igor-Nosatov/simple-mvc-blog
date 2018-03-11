@@ -15,5 +15,5 @@ $title = 'Changer de mot the passe';
         <label for="new-password-confirm">Confirmer</label>
         <input type="password" name="new-password-confirm" id="new-password-confirm" class="form-control">
     </div>
-    <input type="submit" value="Login" class="btn btn-primary">
+    <input type="submit" value="Envoyer" class="btn btn-primary">
 </form>
