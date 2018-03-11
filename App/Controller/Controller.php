@@ -94,7 +94,7 @@ class Controller
             $this->flash->set('Commentaire ajouté');
         }
 
-        header('Location: /post/' . $req->getData('id'));
+        $this->httpResponse->redirect('/post/' . $req->getData('id'));
     }
 
     public function authenticate(HTTPRequest $req)
@@ -108,12 +108,12 @@ class Controller
         {
             $this->flash->set('Login ou mot de passe invalide', 'danger');
 
-            header('Location: /login');
+            $this->httpResponse->redirect('/login');
         }
         else
         {
             $user->login();
-            header('Location: /admin');
+            $this->httpResponse->redirect('/admin');
         }
     }
 
@@ -128,7 +128,7 @@ class Controller
 
         $this->flash->set('Post ajouté');
 
-        header('Location: /admin');
+        $this->httpResponse->redirect('/admin');
     }
 
     public function updatePost(HTTPRequest $req)
@@ -149,7 +149,7 @@ class Controller
 
         $this->flash->set('Post mis à jour');
 
-        header('Location: /admin');
+        $this->httpResponse->redirect('/admin');
     }
 
     public function deletePost(HTTPRequest $req)
@@ -158,7 +158,7 @@ class Controller
 
         $this->flash->set('Post supprimé');
 
-        header('Location: /admin');
+        $this->httpResponse->redirect('/admin');
     }
 
     public function flagComment(HTTPRequest $req)
@@ -171,7 +171,7 @@ class Controller
 
         $this->flash->set('Commentaire signalé');
 
-        header('Location: /post/' . $comment->getPostId());
+        $this->httpResponse->redirect('/post/' . $comment->getPostId());
     }
 
     public function adminPanel()
@@ -194,7 +194,7 @@ class Controller
 
         $this->flash->set('Commentaire ignoré');
 
-        header('Location: /admin');
+        $this->httpResponse->redirect('/admin');
     }
 
     public function login()
@@ -283,12 +283,12 @@ class Controller
         if (!$user || !password_verify($oldPassword, $user->getPassword()))
         {
             $this->flash->set('Mot de passe invalide', 'danger');
-            header('Location: /admin/changePassword');
+            $this->httpResponse->redirect('/admin/changePassword');
         }
         else if ($newPassword !== $newPasswordConfirm)
         {
             $this->flash->set('Les deux champs nouveau mot de passe ne correspondent pas', 'danger');
-            header('Location: /admin/changePassword');
+            $this->httpResponse->redirect('/admin/changePassword');
         }
         else
         {
@@ -298,7 +298,7 @@ class Controller
             
             $this->flash->set('Mot de passe changé');
             
-            header('Location: /admin');
+            $this->httpResponse->redirect('/admin');
         }
     }
 }
