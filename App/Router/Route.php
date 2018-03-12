@@ -18,24 +18,6 @@ class Route
         $this->setMiddleware($data['middleware']);
     }
 
-    /**
-     * Uses regex to check if the route matches the url
-     *
-     * @param string $url
-     * @return array|null
-     */
-    public function match(string $url) : ?array
-    {
-        if (preg_match('#^' . $this->url . '$#', $url, $matches))
-        {
-            return $matches;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     public function setUrl($url)
     {
         if (is_string($url))
@@ -60,11 +42,6 @@ class Route
         }
     }
 
-    public function setVars($vars)
-    {
-        $this->vars = $vars;
-    }
-
     public function getUrl() : string
     {
         return $this->url;
@@ -86,14 +63,14 @@ class Route
     }
     
     /**
-     * Try to match the route with the provided url
-     * Compare both urls part by part then return true and set the variables if
-     * everything matches.
+     * Tries to match the route with the provided url.
+     * Compare both urls part by part then set the variables and notifies the router
+     * the route matches if everything checks out.
      *
      * @param string $url
-     * @return boolean|null
+     * @return boolean
      */
-    public function get(string $url) : ?bool
+    public function get(string $url) : bool
     {
         $keys = [];
         $values = [];
@@ -116,7 +93,7 @@ class Route
         // If both urls don't have the same number of parts, we can return now
         if (count($urlParts) !== count($url))
         {
-            return null;
+            return false;
         }
 
         // The first element is always empty
@@ -135,7 +112,7 @@ class Route
                 // Try to match the pattern with the provided url in the same position
                 if(!preg_match('#' . $pattern . '#', $url[$i], $matches))
                 {
-                    return null;
+                    return false;
                 }
                 else
                 {
@@ -146,12 +123,12 @@ class Route
             {
                 if ($url[$i] !== $urlParts[$i])
                 {
-                    return null;
+                    return false;
                 }
             }
         }
         
-        $this->params= array_combine($keys, $values);
+        $this->params = array_combine($keys, $values);
 
         return true;
     }
