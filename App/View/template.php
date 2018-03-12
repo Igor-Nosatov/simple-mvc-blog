@@ -25,7 +25,7 @@
     <?php if ($_SERVER['REQUEST_URI'] === '/'): ?>
     <div class="jumbotron jumbotron-fluid d-flex align-items-center justify-content-center">
         <div class="container">
-            <h1 class="display-4">Blog de Jean Laroche</h1>
+            <h1 class="display-4">Blog de Jean Forteroche</h1>
             <p class="lead">Écrivain et romancier</p>
         </div>
     </div>

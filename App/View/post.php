@@ -19,16 +19,22 @@ $title = $post->getTitle();
 
     <?php foreach ($comments as $comment): ?>
         <article class="comment p-2 mb-2">
-            <header class="comment__header">
+            <header class="comment__header d-flex justify-content-between">
                 <h5 class="comment__heading">
                     <?= htmlspecialchars($comment->getAuthor()) ?> 
                 </h5>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle text-muted bg-white border-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/flagComment/<?= $comment->getId() ?>">Signaler</a>
+                    </div>
+                </div>
             </header>
             <div class="comment__content">
                 <?= nl2br(htmlspecialchars($comment->getContent())) ?>
             </div>
             <div class="comment__footer d-flex justify-content-end">
-                <a href="/flagComment/<?= $comment->getId() ?>">Signaler</a>
             </div>
         </article>
     <?php endforeach; ?>
