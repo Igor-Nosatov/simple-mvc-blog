@@ -28,6 +28,9 @@ $title = $post->getTitle();
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/flagComment/<?= $comment->getId() ?>">Signaler</a>
+                        <?php if (isset($_SESSION['id'])): ?>
+                            <a class="dropdown-item" href="/admin/deleteComment/<?= $comment->getId() ?>">Supprimer</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </header>

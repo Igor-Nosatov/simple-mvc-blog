@@ -186,6 +186,8 @@ class Controller
         $this->commentManager->delete($req->getData('id'));
 
         $this->flash->set('Commentaire supprimé');
+
+        $this->httpResponse->redirect('/admin');
     }
 
     public function unflagComment(HTTPRequest $req)
