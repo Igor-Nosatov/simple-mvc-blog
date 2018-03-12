@@ -5,9 +5,10 @@ $title = 'Admin';
 <div class="admin-inner container bg-white">
 <h1 class="py-4 px-2">Administration</h1>
 
-<div class="mb-4">
+<div class="mb-4 d-flex justify-content-around">
     <a href="/admin/writePost">Ajouter un post</a>
     <a href="/admin/changePassword">Changer de mot de passe</a>
+    <a href="/admin/logout">Deconnexion</a>
 </div>
 
 <table class="table">

@@ -280,7 +280,7 @@ class Controller
 
         $user = $this->userManager->getById($userId);
 
-        if (!$user || !password_verify($oldPassword, $user->getPassword()))
+        if (!password_verify($oldPassword, $user->getPassword()))
         {
             $this->flash->set('Mot de passe invalide', 'danger');
             $this->httpResponse->redirect('/admin/changePassword');
@@ -300,5 +300,12 @@ class Controller
             
             $this->httpResponse->redirect('/admin');
         }
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['id']);
+        $this->flash->set('Vous êtes déconnecté');
+        $this->httpResponse->redirect('/');
     }
 }

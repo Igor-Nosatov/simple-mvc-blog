@@ -95,5 +95,10 @@ $routes = [
         'url' => '/admin/executeChangePassword',
         'action' => 'executeChangePassword',
         'middleware' => '\App\Router\Authenticate',
+    ],
+    [
+        'url' => '/admin/logout',
+        'action' => 'logout',
+        'middleware' => '\App\Router\Authenticate',
     ]
 ];
