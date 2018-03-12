@@ -294,13 +294,21 @@ class Controller
         }
         else
         {
-            $newHash = password_hash($newPassword, PASSWORD_DEFAULT);
+            $user->setPassword($newPassword);
 
-            $this->userManager->updatePassword($userId, $newHash);
-            
-            $this->flash->set('Mot de passe changé');
-            
-            $this->httpResponse->redirect('/admin');
+            if ($user->hasErrors())
+            {
+                $this->flash->set($user->getErrors()[0], 'danger');
+                $this->httpResponse->redirect('/admin/changePassword');
+            }
+            else
+            {
+                $this->userManager->updatePassword($user);
+                
+                $this->flash->set('Mot de passe changé');
+                
+                $this->httpResponse->redirect('/admin');
+            }
         }
     }
 

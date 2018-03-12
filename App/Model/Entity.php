@@ -46,4 +46,9 @@ abstract class Entity
             $this->id = $id;
         }
     }
+
+    public function getErrors()
+    {
+        return $this->errors;
+    }
 }

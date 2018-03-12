@@ -33,14 +33,14 @@ class UserManager extends Manager
         return $user ? $user : null;
     }
 
-    public function updatePassword($id, $hash)
+    public function updatePassword(User $user)
     {
-        $sql = 'UPDATE users SET password = :hash WHERE id = :id';
+        $sql = 'UPDATE users SET password = :password WHERE id = :id';
 
         $req = $this->db->prepare($sql);
 
-        $req->bindValue(':hash', $hash, \PDO::PARAM_STR);
-        $req->bindValue(':id', $id, \PDO::PARAM_INT);
+        $req->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+        $req->bindValue(':password', $user->getPassword(), \PDO::PARAM_STR);
         $req->execute();
     }
 }
