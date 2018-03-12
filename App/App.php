@@ -11,7 +11,6 @@ class App
     public function __construct()
     {
         $this->router = new \App\Router\Router();
-        $this->controller = new \App\Controller\Controller();
         $this->httpRequest= new \App\Router\HTTPRequest();
         $this->httpResponse = new \App\Router\HTTPResponse();
     }
@@ -47,6 +46,8 @@ class App
         $_GET = $route->getParams();
 
         $action = $route->getAction();
+        $controller = __NAMESPACE__ . '\Controller\\' . $route->getController();
+        $this->controller = new $controller();
         $this->controller->$action($this->httpRequest);
     }
 }

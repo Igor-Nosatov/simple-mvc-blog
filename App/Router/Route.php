@@ -7,6 +7,7 @@ namespace App\Router;
 class Route
 {
     private $url,
+            $controller,
             $action,
             $middleware,
             $params = [];
@@ -14,6 +15,7 @@ class Route
     public function __construct(array $data)
     {
         $this->setUrl($data['url']);
+        $this->setController($data['controller']);
         $this->setAction($data['action']);
         $this->setMiddleware($data['middleware']);
     }
@@ -23,6 +25,14 @@ class Route
         if (is_string($url))
         {
             $this->url = $url;
+        }
+    }
+    
+    public function setController($controller)
+    {
+        if (is_string($controller))
+        {
+            $this->controller = $controller;
         }
     }
 
@@ -50,6 +60,11 @@ class Route
     public function getAction() : string
     {
         return $this->action;
+    }
+
+    public function getController() : string
+    {
+        return $this->controller;
     }
 
     public function getMiddleware() : string
