@@ -5,6 +5,7 @@ tinymce.init({
     "searchreplace visualblocks code fullscreen",
     "insertdatetime media table contextmenu paste imagetools wordcount"
   ],
+  language_url : '/js/tinymce/langs/fr_FR.js',
   toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
   // enable title field in the Image dialog
   image_title: true, 
