@@ -15,7 +15,9 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md bg-white d-flex justify-content-between border-bottom">
-        <a class="navbar-brand" href="/">Blog</a>
+        <a class="navbar-brand" href="/">
+            <img class="logo" src="/img/logo.png" alt="logo">
+        </a>
         <?php if (isset($_SESSION['id'])): ?>
             <a href="/admin">Espace d'administration</a>
         <?php endif; ?>
@@ -25,8 +27,8 @@
     <?php if ($_SERVER['REQUEST_URI'] === '/'): ?>
     <div class="jumbotron jumbotron-fluid d-flex align-items-center justify-content-center">
         <div class="container">
-            <h1 class="display-4">Blog de Jean Forteroche</h1>
-            <p class="lead">Écrivain et romancier</p>
+            <h1 class="display-4">Billet simple pour l'Alaska</h1>
+            <p class="lead">Par Jean Forteroche - Écrivain et romancier</p>
         </div>
     </div>
     <?php endif; ?>
