@@ -23,16 +23,15 @@ $title = $post->getTitle();
                 <h5 class="comment__heading">
                     <?= htmlspecialchars($comment->getAuthor()) ?> 
                 </h5>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle text-muted bg-white border-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/flagComment/<?= $comment->getId() ?>">Signaler</a>
-                        <?php if (isset($_SESSION['id'])): ?>
-                            <a class="dropdown-item" href="/admin/deleteComment/<?= $comment->getId() ?>">Supprimer</a>
-                        <?php endif; ?>
-                    </div>
-                </div>
+                <?php if (!isset($_SESSION['id'])): ?>
+                    <a href="/flagComment/<?= $comment->getId() ?>" class="comment__action" title="Signaler">
+                        <i class="fas fa-ban"></i>
+                    </a>
+                <?php elseif (isset($_SESSION['id'])): ?>
+                    <a href="/admin/deleteComment/<?= $comment->getId() ?>" class="comment__action" title="Supprimer">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                <?php endif; ?>
             </header>
             <div class="comment__content">
                 <?= nl2br(htmlspecialchars($comment->getContent())) ?>
