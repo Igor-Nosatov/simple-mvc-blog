@@ -15,4 +15,9 @@ class HTTPResponse
         header('Location: /404');
         exit;
     }
+
+    public function addHeader(string $header)
+    {
+        header($header);
+    }
 }
