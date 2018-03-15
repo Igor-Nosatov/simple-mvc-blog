@@ -10,14 +10,16 @@ class Paginator
             $offset,
             $page,
             $postsTotal,
-            $pagesTotal;
+            $pagesTotal,
+            $url;
 
     /**
-     * @param integer $page the current page number
+     * @param string $url the url to paginate
+     * @param integer|null $page the current page number
      * @param integer $limit the number of posts per page
      * @param integer $postsTotal the total number of posts
      */
-    public function __construct($page, int $limit, int $postsTotal)
+    public function __construct(string $url, ?int $page, int $limit, int $postsTotal)
     {
         if (!$page)
         {
@@ -27,6 +29,8 @@ class Paginator
         {
             $this->page = $page;
         }
+
+        $this->url = $url;
         
         $this->limit = $limit;
 
@@ -67,12 +71,12 @@ class Paginator
         if ($this->page > 1)
         {
             $html .= '<li class="page-item">';
-            $html .= '<a href="/posts/' . $previous . '" class="page-link">Precedent</a>';
+            $html .= '<a href="' . $this->url . '/' . $previous . '" class="page-link">Precedent</a>';
         }
         else
         {
             $html .= '<li class="page-item disabled">';
-            $html .= '<a href="/posts/' . $previous . '" class="page-link" tabindex="-1">Precedent</a>';
+            $html .= '<a href="' . $this->url . '/' . $previous . '" class="page-link" tabindex="-1">Precedent</a>';
         }
         
         $html .= '</li>';
@@ -93,12 +97,12 @@ class Paginator
         if ($this->page < $this->pagesTotal)
         {
             $html .= '<li class="page-item">';
-            $html .= '<a href="/posts/'. $next . '" class="page-link">Suivant</a>';
+            $html .= '<a href="' . $this->url . '/' . $next . '" class="page-link">Suivant</a>';
         }
         else
         {
             $html .= '<li class="page-item disabled">';
-            $html .= '<a href="/posts/'. $next . '" class="page-link" tabindex="-1">Suivant</a>';
+            $html .= '<a href="' . $this->url . '/' . $next . '" class="page-link" tabindex="-1">Suivant</a>';
         }
         
         $html .= '</li>';
@@ -126,7 +130,7 @@ class Paginator
                 $html .= '<li class="page-item">';
             }
             
-            $html .= '<a href="/posts/' . $i . '" class="page-link">' . $i . '</a>';
+            $html .= '<a href="' . $this->url . '/' . $i . '" class="page-link">' . $i . '</a>';
             $html .= '</li>';
         }
         

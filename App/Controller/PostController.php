@@ -21,7 +21,7 @@ class PostController extends Controller
 
         $postsTotal = $this->postManager->count();
 
-        $paginator = new \App\Model\Paginator($page, $limit, $postsTotal);
+        $paginator = new \App\Model\Paginator('/posts', $page, $limit, $postsTotal);
 
         $offset = $paginator->offset();
 
