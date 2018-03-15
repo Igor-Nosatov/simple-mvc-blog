@@ -2,7 +2,7 @@
 namespace App\Model;
 
 /**
- * Creates the paginated navigation
+ * Creates a paginated navigation using Twitter Bootstrap 
  */
 class Paginator
 {
@@ -21,19 +21,9 @@ class Paginator
      */
     public function __construct(string $url, ?int $page, int $limit, int $postsTotal)
     {
-        if (!$page)
-        {
-            $this->page = 1;
-        }
-        else
-        {
-            $this->page = $page;
-        }
-
+        $this->page = $page ?? 1;
         $this->url = $url;
-        
         $this->limit = $limit;
-
         $this->postsTotal = $postsTotal;
         $this->pagesTotal = $this->pagesTotal();
     }
@@ -61,7 +51,7 @@ class Paginator
     /**
      * Creates the previous button
      *
-     * @return string
+     * @return string the previous button html
      */
     public function previous() : string
     {
@@ -87,7 +77,7 @@ class Paginator
     /**
      * Creates the next button
      *
-     * @return string
+     * @return string the next button html
      */
     public function next() : string
     {
@@ -111,9 +101,9 @@ class Paginator
     }
 
     /**
-     * Creates the pages buttons
+     * Creates the numbered pages links 
      *
-     * @return string
+     * @return string the pages links html
      */
     public function pages() : string
     {
