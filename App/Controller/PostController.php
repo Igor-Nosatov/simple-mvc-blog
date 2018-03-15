@@ -25,7 +25,13 @@ class PostController extends Controller
 
         $offset = $paginator->offset();
 
-        $posts = $this->postManager->getPosts($limit, $offset);
+        $posts = $this->postManager->getPosts([
+            'limit' => $limit,
+            'offset' => $offset,
+            'order' => 'desc'
+        ]);
+        
+        $postsAsc = $this->postManager->getPosts(['order' => 'asc']);
 
         if (empty($posts))
         {
@@ -33,7 +39,7 @@ class PostController extends Controller
         }
         else
         {
-            $this->show('../App/View/listPosts.php', compact('posts', 'paginator'));
+            $this->show('../App/View/listPosts.php', compact('posts', 'paginator', 'postsAsc'));
         }
     }
 

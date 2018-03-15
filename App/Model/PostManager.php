@@ -3,13 +3,23 @@ namespace App\Model;
 
 class PostManager extends Manager
 {
-    public function getPosts($limit = -1, $offset = -1) : array
+    public function getPosts(array $params = []) : array
     {
-        $sql = 'SELECT id, title, content, DATE_FORMAT(dateAdded, \'%d/%m/%Y\') AS dateAdded, dateModified FROM posts ORDER BY dateAdded DESC';
-
-        if ($limit != -1 || $offset != -1)
+        $sql = 'SELECT id, title, content, DATE_FORMAT(dateAdded, \'%d/%m/%Y\') AS dateAdded, dateModified FROM posts ORDER BY dateAdded';
+        
+        if (isset($params['order']))
         {
-            $sql .= ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset;
+            $sql .= ' ' . strtoupper($params['order']);
+        }
+
+        if (isset($params['limit']))
+        {
+            $sql .= ' LIMIT ' . (int) $params['limit'];
+        }
+        
+        if (isset($params['offset']))
+        {
+            $sql .= ' OFFSET ' . (int) $params['offset'];
         }
 
         $req = $this->db->query($sql);
@@ -18,7 +28,7 @@ class PostManager extends Manager
 
         return $posts;
     }
-
+    
     public function getSingle($id) : ?Post
     {
         $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id = :id';
