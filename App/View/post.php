@@ -1,10 +1,8 @@
-<?php 
-$title = $post->getTitle();
-?>
+<?php $title = $post->getTitle(); ?>
 
-<article class="post--single bg-white p-4 mb-4">
-    <header class="post-header pb-2">
-        <h3 class="post-heading">
+<article class="post bg-white p-4 mb-4">
+    <header class="post__header pb-2">
+        <h3 class="post__heading">
             <?= $post->getTitle() ?>
         </h3>
     </header>

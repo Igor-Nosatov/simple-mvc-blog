@@ -1,6 +1,4 @@
-<?php 
-$title = 'Changer de mot the passe';
-?>
+<?php $title = 'Changer de mot the passe'; ?>
 
 <h1 class="mb-4">Changer de mot de passe</h1>
 

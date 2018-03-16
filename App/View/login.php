@@ -1,6 +1,4 @@
-<?php 
-$title = 'login';
-?>
+<?php $title = 'Connexion'; ?>
 
 <h1 class="mb-4">Connexion</h1>
 

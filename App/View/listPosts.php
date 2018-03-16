@@ -1,8 +1,8 @@
-<?php $title = 'blog'; ?>
+<?php $title = 'Billet simple pour l\'Alaska'; ?>
 
 <div class="row">
-    <div class="col-md-3">
-        <aside class="bg-white border">
+    <div class="col-md-3 mb-4">
+        <aside class="bg-white border pb-2">
             <h5 class="text-center p-3 bg-light">Tous les chapitres</h5>
             <ul class="nav flex-column">
             <?php foreach ($postsAsc as $postAsc): ?>
@@ -16,7 +16,7 @@
 
     <div class="col">
         <?php foreach ($posts as $post): ?>
-            <article class="post mb-4 p-md-4 bg-white border">
+            <article class="post mb-4 p-2 p-md-4 bg-white border">
                 <header class="post__header p-2 border-bottom">
                     <a href="/post/<?= $post->getId() ?>">
                         <h3 class="post__heading">

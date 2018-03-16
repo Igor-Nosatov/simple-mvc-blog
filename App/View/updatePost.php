@@ -1,10 +1,8 @@
-<?php 
-$title = 'Modifier le post';
-?>
+<?php $title = 'Modification du chapitre'; ?>
 
-<h1 class="mb-4">Modifier un post</h1>
+<h1 class="mb-4"><?= $title ?></h1>
 
-<form action="/admin/executeUpdatePost/<?= $post->getId() ?>" method="post" class="bg-light p-4">
+<form action="/admin/executeUpdatePost/<?= $post->getId() ?>" method="post" class="bg-light p-md-4">
     <div class="form-group">
         <input type="text" name="title" id="title" value="<?= $post->getTitle() ?>" class="form-control">
     </div>
