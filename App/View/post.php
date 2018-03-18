@@ -6,7 +6,23 @@
             <?= $post->getTitle() ?>
         </h3>
     </header>
-    <?= $post->getContent() ?>
+    <div class="post__content pb-4">
+        <?= $post->getContent() ?>
+    </div>
+    <footer class="post__footer d-flex">
+        <?php if (!is_null($previousPost)): ?>
+            <a href="/post/<?= $previousPost->getId() ?>" class="post__previous mr-auto">
+                <i class="fas fa-long-arrow-alt-left mr-1"></i>
+                Précédent
+            </a> 
+        <?php endif; ?>
+        <?php if (!is_null($nextPost)): ?>
+            <a href="/post/<?= $nextPost->getId() ?>" class="post__next ml-auto">
+                Suivant
+                <i class="fas fa-long-arrow-alt-right ml-1"></i>
+            </a> 
+        <?php endif; ?>
+    </footer>
 </article>
 
 <section class="comments bg-white p-4">

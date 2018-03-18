@@ -45,7 +45,11 @@ class PostController extends Controller
 
     public function post(HTTPRequest $req)
     {
-        $post = $this->postManager->getSingle($req->getData('id'));
+        $id = $req->getData('id');
+
+        $post = $this->postManager->getSingle($id);
+        $previousPost = $this->postManager->getPrevious($id);
+        $nextPost = $this->postManager->getNext($id);
 
         if (null === $post)
         {
@@ -55,7 +59,7 @@ class PostController extends Controller
         {
             $comments = $this->commentManager->getComments($req->getData('id'));
 
-            $this->show('../App/View/post.php', compact('post', 'comments'));
+            $this->show('../App/View/post.php', compact('post', 'comments', 'previousPost' ,'nextPost'));
         }
     }
     
