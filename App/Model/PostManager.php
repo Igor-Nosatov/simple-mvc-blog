@@ -43,6 +43,36 @@ class PostManager extends Manager
 
         return $post ? $post : null;
     }
+    
+    public function getPrevious($id) : ?Post 
+    {
+        $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id < :id ORDER BY id DESC LIMIT 1';
+
+        $req = $this->db->prepare($sql);
+        
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
+        $req->execute();
+        
+        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Post');
+        $post = $req->fetch();
+
+        return $post ? $post : null;
+    }
+
+    public function getNext($id) : ?Post 
+    {
+        $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id > :id LIMIT 1';
+
+        $req = $this->db->prepare($sql);
+        
+        $req->bindValue(':id', $id, \PDO::PARAM_INT);
+        $req->execute();
+        
+        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Post');
+        $post = $req->fetch();
+
+        return $post ? $post : null;
+    }
 
     public function add(Post $post)
     {
