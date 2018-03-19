@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title><?= $title ?></title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -16,10 +17,14 @@
     <header>
         <nav class="navbar navbar-expand-md bg-white d-flex justify-content-between border-bottom">
         <a class="navbar-brand" href="/">
-            <img class="logo" src="/img/logo.png" alt="logo">
+            <img class="logo" src="/img/logo.png" alt="logo" title="Accueil">
         </a>
         <?php if (isset($_SESSION['id'])): ?>
-            <a href="/admin">Espace d'administration</a>
+            <?php if($_SERVER['REQUEST_URI'] === '/admin'): ?>
+                <a href="/admin/logout"><i class="fas fa-sign-out-alt mr-1"></i>Deconnexion</a>
+            <?php else: ?>
+                <a href="/admin">Espace d'administration</a>
+            <?php endif; ?>
         <?php endif; ?>
         </nav>
     </header>
@@ -43,7 +48,6 @@
 
         <?= $content ?> 
     </main>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </body>
 
 </html>

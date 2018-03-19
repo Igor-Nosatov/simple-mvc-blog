@@ -1,12 +1,13 @@
 <?php $title = 'Administration'; ?>
 
-<div class="admin-inner bg-white p-md-2">
-    <h1 class="py-4 px-2">Administration</h1>
+<section class="administration bg-white">
+    <header class="d-flex justify-content-between p-4 align-items-center">
+        <h1 class="">Administration</h1>
+    </header>
 
-    <div class="mb-4 px-2 d-flex justify-content-around">
-        <a href="/admin/writePost">Écrire un chapitre</a>
-        <a href="/admin/changePassword">Changer de mot de passe</a>
-        <a href="/admin/logout">Deconnexion</a>
+    <div class="mb-4 px-2 d-flex justify-content-around flex-md-row flex-column">
+        <a href="/admin/writePost"><i class="fas fa-pencil-alt mr-1"></i> Écrire un chapitre</a>
+        <a href="/admin/changePassword"><i class="fas fa-key mr-1"></i> Changer de mot de passe</a>
     </div>
 
     <table class="table table-striped posts-table">
@@ -29,21 +30,23 @@
                     </td>
                     <td class="d-sm-table-cell d-block">
                         <a href="/admin/updatePost/<?= $post->getId() ?>" class="btn btn-primary">Modifier</a>
-                        <a data-toggle="modal" data-target="#delete-modal" class="btn btn-warning" href="/admin/deletePost/<?= $post->getId() ?>">Supprimer</a>
+                        <a data-toggle="modal" data-target="#delete-modal" class="btn btn-warning delete-btn" href="/admin/deletePost/<?= $post->getId() ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
-    <section class="comments">
-        <h3>Commentaires signalés</h3>
-        <?php if (empty($flaggedComments)): ?>
-        <p>Pas de commentaire signalé.</p>
-        <?php endif; ?>
+    <section class="flagged-comments p-4">
+        <header class="mb-4">
+            <h3>Commentaires signalés</h3>
+            <?php if (empty($flaggedComments)): ?>
+            <p>Pas de commentaire signalé.</p>
+            <?php endif; ?>
+        </header>
 
         <?php foreach ($flaggedComments as $flaggedComment): ?>
-            <article class="comment">
+            <article class="comment mb-4">
                 <header class="comment__header">
                     <h5 class="comment__heading">
                         <?= htmlspecialchars($flaggedComment->getAuthor()) ?>
@@ -75,11 +78,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <a class="btn btn-primary" id="delete" href="">Confirmer</a>
+                <a class="btn btn-primary" id="delete" href="#">Confirmer</a>
             </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script src="js/confirm.js"></script>

@@ -1,6 +1,6 @@
-let deleteLinks = document.querySelectorAll('.delete-post');
+let deleteBtns = document.querySelectorAll('.delete-btn');
 
-deleteLinks.forEach(link => {
+deleteBtns.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         document.getElementById('delete').href = e.target.href;
