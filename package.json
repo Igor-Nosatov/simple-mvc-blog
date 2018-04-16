@@ -1,0 +1,25 @@
+{
+  "name": "simple-mvc-blog",
+  "version": "1.0.0",
+  "description": "simple-mvc-blog",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss Web/css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcoudurier/simple-MVC-blog.git"
+  },
+  "author": "Mathieu Coudurier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcoudurier/simple-MVC-blog/issues"
+  },
+  "homepage": "https://github.com/mcoudurier/simple-MVC-blog#readme",
+  "devDependencies": {
+    "node-sass": "^4.8.2"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0"
+  }
+}
