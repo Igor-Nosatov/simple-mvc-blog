@@ -114,7 +114,7 @@ class PostController extends Controller
     
     public function imgUploadTinyMCE()
     {
-        $accepted_origins = array("http://projet4.local");
+        $accepted_origins = array('http://' . $_SERVER['SERVER_NAME']);
 
         $imageFolder = "img/uploads/";
 
