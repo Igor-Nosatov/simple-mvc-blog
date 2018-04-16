@@ -1,6 +1,6 @@
 <?php
 
-$routes = [
+return [
     [
         'url' => '/',
         'controller' => 'PostController',

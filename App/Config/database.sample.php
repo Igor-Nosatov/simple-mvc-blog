@@ -1,8 +1,8 @@
 <?php
 
-$dbConfig = array(
+return [
     'host' => '',
     'dbname' => '',
     'username' => '',
     'password' => ''
-);
+];
