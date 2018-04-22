@@ -4,7 +4,8 @@
   "description": "simple-mvc-blog",
   "main": "index.js",
   "scripts": {
-    "compile:sass": "node-sass sass/main.scss Web/css/style.css -w"
+    "compile-css": "node-sass sass/main.scss Web/css/style.css",
+    "watch-css": "node-sass sass/main.scss Web/css/style.css -w"
   },
   "repository": {
     "type": "git",
