@@ -3,7 +3,8 @@ Small blog written in pure php.
 
 ## Installation
 #### Database
-Create a new database then import database.sql
+- Create a new database then import database.sql  
+- Setup the database connection in App/Config/database.php
 
 #### Css
 ```
