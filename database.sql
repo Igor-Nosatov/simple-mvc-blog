@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 21, 2018 at 06:36 PM
+-- Generation Time: Apr 28, 2018 at 12:19 AM
 -- Server version: 10.1.32-MariaDB
--- PHP Version: 7.2.4
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -64,6 +64,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'admin', '$2y$10$RRo2JSxIigHbXG5zX/uhiO0L42rx1PGOd0PAog7H7LbSeBguOt2yi');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -94,13 +101,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `users`

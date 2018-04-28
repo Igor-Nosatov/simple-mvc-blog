@@ -5,6 +5,7 @@ Small blog written in pure php.
 #### Database
 - Create a new database then import database.sql  
 - Setup the database connection in App/Config/database.php
+- Default user is admin / -HAzSdr{gC3LhK?A
 
 #### Css
 ```
@@ -17,4 +18,3 @@ npm run compile-css
 - TinyMCE
 - npm
 - sass
-
