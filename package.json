@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/mcoudurier/simple-MVC-blog#readme",
   "devDependencies": {
-    "node-sass": "^4.8.3"
+    "node-sass": "^4.9.0"
   },
   "dependencies": {
     "bootstrap": "^4.1.0"
