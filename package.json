@@ -4,8 +4,8 @@
   "description": "simple-mvc-blog",
   "main": "index.js",
   "scripts": {
-    "compile-css": "node-sass sass/main.scss Web/css/style.css",
-    "watch-css": "node-sass sass/main.scss Web/css/style.css -w"
+    "compile-css": "node-sass --output-style compressed sass/main.scss Web/css/style.css",
+    "watch-css": "node-sass -w --output-style compressed sass/main.scss Web/css/style.css"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,8 @@
   },
   "homepage": "https://github.com/mcoudurier/simple-MVC-blog#readme",
   "devDependencies": {
+    "bootstrap": "^4.1.1",
     "node-sass": "^4.9.0"
   },
-  "dependencies": {
-    "bootstrap": "^4.1.0"
-  }
+  "dependencies": {}
 }
