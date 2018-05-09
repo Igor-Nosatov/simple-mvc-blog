@@ -7,7 +7,7 @@ Small blog written in pure php.
 - Setup the database connection in App/Config/database.php
 - Default user is admin / -HAzSdr{gC3LhK?A
 
-#### Css
+#### Development
 ```
 npm install
 npm run compile-css
