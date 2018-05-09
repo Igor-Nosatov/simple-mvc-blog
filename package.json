@@ -4,8 +4,8 @@
   "description": "simple-mvc-blog",
   "main": "index.js",
   "scripts": {
-    "compile-css": "node-sass --output-style compressed sass/main.scss Web/css/style.css",
-    "watch-css": "node-sass -w --output-style compressed sass/main.scss Web/css/style.css"
+    "compile-css": "node-sass --output-style compressed sass/main.scss public/css/style.css",
+    "watch-css": "node-sass -w --output-style compressed sass/main.scss public/css/style.css"
   },
   "repository": {
     "type": "git",
