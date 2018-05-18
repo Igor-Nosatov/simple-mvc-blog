@@ -2,16 +2,16 @@
 namespace App\Model;
 
 /**
- * Creates a paginated navigation using Twitter Bootstrap 
+ * Creates a paginated navigation using Twitter Bootstrap
  */
 class Paginator
 {
-    private $limit,
-            $offset,
-            $page,
-            $postsTotal,
-            $pagesTotal,
-            $url;
+    private $limit;
+    private $offset;
+    private $page;
+    private $postsTotal;
+    private $pagesTotal;
+    private $url;
 
     /**
      * @param string $url the url to paginate
@@ -58,13 +58,10 @@ class Paginator
         $html = '';
         $previous = $this->page - 1;
 
-        if ($this->page > 1)
-        {
+        if ($this->page > 1) {
             $html .= '<li class="page-item">';
             $html .= '<a href="' . $this->url . '/' . $previous . '" class="page-link">Precedent</a>';
-        }
-        else
-        {
+        } else {
             $html .= '<li class="page-item disabled">';
             $html .= '<a href="' . $this->url . '/' . $previous . '" class="page-link" tabindex="-1">Precedent</a>';
         }
@@ -84,13 +81,10 @@ class Paginator
         $html = '';
         $next = $this->page + 1;
 
-        if ($this->page < $this->pagesTotal)
-        {
+        if ($this->page < $this->pagesTotal) {
             $html .= '<li class="page-item">';
             $html .= '<a href="' . $this->url . '/' . $next . '" class="page-link">Suivant</a>';
-        }
-        else
-        {
+        } else {
             $html .= '<li class="page-item disabled">';
             $html .= '<a href="' . $this->url . '/' . $next . '" class="page-link" tabindex="-1">Suivant</a>';
         }
@@ -101,7 +95,7 @@ class Paginator
     }
 
     /**
-     * Creates the numbered pages links 
+     * Creates the numbered pages links
      *
      * @return string the pages links html
      */
@@ -109,14 +103,10 @@ class Paginator
     {
         $html = '';
 
-        for ($i = 1; $i < $this->pagesTotal + 1; $i++)
-        {
-            if ($i == $this->page)
-            {
+        for ($i = 1; $i < $this->pagesTotal + 1; $i++) {
+            if ($i == $this->page) {
                 $html .= '<li class="page-item active">';
-            }
-            else
-            {
+            } else {
                 $html .= '<li class="page-item">';
             }
             

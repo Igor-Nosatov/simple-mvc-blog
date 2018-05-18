@@ -4,8 +4,8 @@ namespace App\Model;
 
 class Flash
 {
-    private $type,
-            $message;
+    private $type;
+    private $message;
 
     public function set(string $message, string $type = 'success')
     {

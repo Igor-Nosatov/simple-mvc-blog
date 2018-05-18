@@ -3,10 +3,10 @@ namespace App\Model;
 
 class Post extends Entity
 {
-    private $title,
-            $content,
-            $dateAdded,
-            $dateModified;
+    private $title;
+    private $content;
+    private $dateAdded;
+    private $dateModified;
 
     public function excerpt(int $length) : string
     {
@@ -37,16 +37,14 @@ class Post extends Entity
 
     public function setTitle($title)
     {
-        if (is_string($title))
-        {
+        if (is_string($title)) {
             $this->title = $title;
         }
     }
 
     public function setContent($content)
     {
-        if (is_string($content))
-        {
+        if (is_string($content)) {
             $this->content = $content;
         }
     }

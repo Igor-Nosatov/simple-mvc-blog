@@ -24,14 +24,11 @@ class UserController extends Controller
 
         $user = $this->userManager->getByUsername($username, $password);
 
-        if(!$user || !password_verify($password, $user->getPassword()))
-        {
+        if (!$user || !password_verify($password, $user->getPassword())) {
             $this->flash->set('Login ou mot de passe invalide', 'danger');
 
             $this->httpResponse->redirect('/login');
-        }
-        else
-        {
+        } else {
             $user->login();
             $this->httpResponse->redirect('/admin');
         }
@@ -59,27 +56,19 @@ class UserController extends Controller
 
         $user = $this->userManager->getById($userId);
 
-        if (!password_verify($oldPassword, $user->getPassword()))
-        {
+        if (!password_verify($oldPassword, $user->getPassword())) {
             $this->flash->set('Mot de passe invalide', 'danger');
             $this->httpResponse->redirect('/admin/changePassword');
-        }
-        else if ($newPassword !== $newPasswordConfirm)
-        {
+        } elseif ($newPassword !== $newPasswordConfirm) {
             $this->flash->set('Les deux champs nouveau mot de passe ne correspondent pas', 'danger');
             $this->httpResponse->redirect('/admin/changePassword');
-        }
-        else
-        {
+        } else {
             $user->setPassword($newPassword);
 
-            if ($user->hasErrors())
-            {
+            if ($user->hasErrors()) {
                 $this->flash->set($user->getErrors()[0], 'danger');
                 $this->httpResponse->redirect('/admin/changePassword');
-            }
-            else
-            {
+            } else {
                 $this->userManager->updatePassword($user);
                 
                 $this->flash->set('Mot de passe changé');

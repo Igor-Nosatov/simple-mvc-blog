@@ -10,13 +10,13 @@
         <?= $post->getContent() ?>
     </div>
     <footer class="post__footer d-flex">
-        <?php if (!is_null($previousPost)): ?>
+        <?php if (!is_null($previousPost)) : ?>
             <a href="/post/<?= $previousPost->getId() ?>" class="post__previous mr-auto">
                 <i class="fas fa-long-arrow-alt-left mr-1"></i>
                 Précédent
             </a> 
         <?php endif; ?>
-        <?php if (!is_null($nextPost)): ?>
+        <?php if (!is_null($nextPost)) : ?>
             <a href="/post/<?= $nextPost->getId() ?>" class="post__next ml-auto">
                 Suivant
                 <i class="fas fa-long-arrow-alt-right ml-1"></i>
@@ -27,21 +27,21 @@
 
 <section class="comments bg-white p-4">
     <h4>Commentaires</h4>
-    <?php if (empty($comments)): ?>
+    <?php if (empty($comments)) : ?>
     <p>Soyez le premier à poster un commentaire.</p>
     <?php endif; ?>
 
-    <?php foreach ($comments as $comment): ?>
+    <?php foreach ($comments as $comment) : ?>
         <article class="comment p-2 mb-2">
             <header class="comment__header d-flex justify-content-between">
                 <h5 class="comment__heading">
                     <?= htmlspecialchars($comment->getAuthor()) ?> 
                 </h5>
-                <?php if (!isset($_SESSION['id'])): ?>
+                <?php if (!isset($_SESSION['id'])) : ?>
                     <a href="/flagComment/<?= $comment->getId() ?>" class="comment__action" title="Signaler">
                         <i class="fas fa-ban"></i>
                     </a>
-                <?php elseif (isset($_SESSION['id'])): ?>
+                <?php elseif (isset($_SESSION['id'])) : ?>
                     <a href="/admin/deleteComment/<?= $comment->getId() ?>" class="comment__action" title="Supprimer">
                         <i class="fas fa-trash"></i>
                     </a>

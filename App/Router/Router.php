@@ -1,7 +1,7 @@
 <?php
 namespace App\Router;
 
-class router
+class Router
 {
     private $routes = [];
 
@@ -18,10 +18,8 @@ class router
      */
     public function getRoute(string $url) : Route
     {
-        foreach ($this->routes as $route)
-        {
-            if ($route->get($url))
-            {
+        foreach ($this->routes as $route) {
+            if ($route->get($url)) {
                 return $route;
             }
         }

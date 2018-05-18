@@ -3,10 +3,10 @@ namespace App;
 
 class App
 {
-    private $router,
-            $controller,
-            $httpRequest,
-            $httpResponse;
+    private $router;
+    private $controller;
+    private $httpRequest;
+    private $httpResponse;
 
     public function __construct()
     {
@@ -21,24 +21,19 @@ class App
 
         $routes = require('../App/Config/routes.php');
        
-        foreach ($routes as $route)
-        {
+        foreach ($routes as $route) {
             $this->router->addRoute(new \App\Router\Route($route));
         }
         
         try {
             $route = $this->router->getRoute($this->httpRequest->getURI());
-        }
-        catch (\Exception $e)
-        {
-            if ($e->getCode() == '404')
-            {
+        } catch (\Exception $e) {
+            if ($e->getCode() == '404') {
                 $this->httpResponse->redirect404();
             }
         }
 
-        if (!empty($middleware = $route->getMiddleware()))
-        {
+        if (!empty($middleware = $route->getMiddleware())) {
             $middleware = new $middleware();
             $middleware($route->getUrl(), $this->httpResponse);
         }

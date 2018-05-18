@@ -3,11 +3,11 @@ namespace App\Model;
 
 class Comment extends Entity
 {
-    private $postId,
-            $author,
-            $content,
-            $dateAdded,
-            $flag;
+    private $postId;
+    private $author;
+    private $content;
+    private $dateAdded;
+    private $flag;
 
     const AUTHOR_INVALID = 1;
     const CONTENT_INVALID = 2;
@@ -40,32 +40,25 @@ class Comment extends Entity
     {
         $postId = (int) $postId;
 
-        if ($postId > 0)
-        {
+        if ($postId > 0) {
             $this->postId = $postId;
         }
     }
 
     public function setAuthor($author)
     {
-        if (is_string($author) && !empty($author))
-        {
+        if (is_string($author) && !empty($author)) {
             $this->author = $author;
-        }
-        else
-        {
+        } else {
             $this->errors[] = self::AUTHOR_INVALID;
         }
     }
 
     public function setContent($content)
     {
-        if (is_string($content) && !empty($content))
-        {
+        if (is_string($content) && !empty($content)) {
             $this->content = $content;
-        }
-        else
-        {
+        } else {
             $this->errors[] = self::CONTENT_INVALID;
         }
     }

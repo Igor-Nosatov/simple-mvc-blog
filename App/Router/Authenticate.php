@@ -5,14 +5,10 @@ class Authenticate
 {
     public function __invoke(string $url, HTTPResponse $httpResponse)
     {
-        if (!isset($_SESSION['id']))
-        {
-            if ($url === '/admin')
-            {
+        if (!isset($_SESSION['id'])) {
+            if ($url === '/admin') {
                 $httpResponse->redirect('/login');
-            }
-            else
-            {
+            } else {
                 $httpResponse->redirect('/');
             }
         }

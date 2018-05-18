@@ -15,12 +15,9 @@ class CommentController extends Controller
             'content' => $req->postData('content')
         ]);
 
-        if($comment->hasErrors())
-        {
+        if ($comment->hasErrors()) {
             $this->flash->set('Tous les champs doivent être remplis', 'danger');
-        }
-        else
-        {
+        } else {
             $this->commentManager->add($comment);
             $this->flash->set('Commentaire ajouté');
         }

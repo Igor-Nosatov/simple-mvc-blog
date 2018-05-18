@@ -3,25 +3,22 @@ namespace App\Model;
 
 abstract class Entity
 {
-    protected $id,
-              $errors = [];
+    protected $id;
+    protected $errors = [];
 
     public function __construct(array $data = [])
     {
-        if (!empty($data))
-        {
+        if (!empty($data)) {
             $this->hydrate($data);
         }
     }
 
     public function hydrate(array $data)
     {
-        foreach ($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
 
-            if (method_exists($this, $method))
-            {
+            if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
@@ -41,8 +38,7 @@ abstract class Entity
     {
         $id = (int) $id;
 
-        if ($id > 0)
-        {
+        if ($id > 0) {
             $this->id = $id;
         }
     }

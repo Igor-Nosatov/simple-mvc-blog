@@ -6,11 +6,11 @@ namespace App\Router;
  */
 class Route
 {
-    private $url,
-            $controller,
-            $action,
-            $middleware,
-            $params = [];
+    private $url;
+    private $controller;
+    private $action;
+    private $middleware;
+    private $params = [];
 
     public function __construct(array $data)
     {
@@ -22,32 +22,28 @@ class Route
 
     public function setUrl($url)
     {
-        if (is_string($url))
-        {
+        if (is_string($url)) {
             $this->url = $url;
         }
     }
     
     public function setController($controller)
     {
-        if (is_string($controller))
-        {
+        if (is_string($controller)) {
             $this->controller = $controller;
         }
     }
 
     public function setAction($action)
     {
-        if (is_string($action))
-        {
+        if (is_string($action)) {
             $this->action = $action;
         }
     }
 
     public function setMiddleware($middleware)
     {
-        if (is_string($middleware))
-        {
+        if (is_string($middleware)) {
             $this->middleware = $middleware;
         }
     }
@@ -90,14 +86,10 @@ class Route
         $keys = [];
         $values = [];
        
-        if (!$this->hasVars())
-        {
-            if ($this->url == $url)
-            {
+        if (!$this->hasVars()) {
+            if ($this->url == $url) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }
@@ -106,17 +98,14 @@ class Route
         $url = explode('/', $url);
 
         // If both urls don't have the same number of parts, we can return now
-        if (count($urlParts) !== count($url))
-        {
+        if (count($urlParts) !== count($url)) {
             return false;
         }
 
         // The first element is always empty
-        for ($i = 1; $i < count($urlParts); $i++)
-        {
+        for ($i = 1; $i < count($urlParts); $i++) {
             // If an opening bracket is found, retrieve the parameter
-            if ($urlParts[$i][0] === '{')
-            {
+            if ($urlParts[$i][0] === '{') {
                 // Split the key and pattern
                 $keyPattern = explode(':', $urlParts[$i]);
                 // Remove the opening bracket
@@ -125,19 +114,14 @@ class Route
                 $pattern = substr($keyPattern[1], 0, -1);
 
                 // Try to match the pattern with the provided url in the same position
-                if(!preg_match('#' . $pattern . '#', $url[$i], $matches))
-                {
+                if (!preg_match('#' . $pattern . '#', $url[$i], $matches)) {
                     return false;
-                }
-                else
-                {
+                } else {
                     $values[] = $url[$i];
                 }
-            }
-            else // If there is no variable in the current position, do a simple string comparison
+            } else // If there is no variable in the current position, do a simple string comparison
             {
-                if ($url[$i] !== $urlParts[$i])
-                {
+                if ($url[$i] !== $urlParts[$i]) {
                     return false;
                 }
             }

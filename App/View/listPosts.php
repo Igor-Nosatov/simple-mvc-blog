@@ -10,7 +10,7 @@
             </header>
             <div class="side-menu__content">
                 <ul class="nav flex-column">
-                <?php foreach ($postsAsc as $postAsc): ?>
+                <?php foreach ($postsAsc as $postAsc) : ?>
                     <li class="nav-item">
                         <a href="/post/<?= $postAsc->getId() ?>" class="nav-link" ><?= $postAsc->getTitle() ?></a> 
                     </li>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="col">
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($posts as $post) : ?>
             <article class="post mb-4 p-2 p-md-4 bg-white border">
                 <header class="post__header p-2 border-bottom">
                     <a href="/post/<?= $post->getId() ?>">

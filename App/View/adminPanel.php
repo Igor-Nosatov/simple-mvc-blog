@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($posts as $post): ?>
+            <?php foreach ($posts as $post) : ?>
                 <tr>
                     <td class="d-sm-table-cell d-block">
                         <a href="/post/<?= $post->getId() ?>"><?= $post->getTitle() ?></a>
@@ -40,12 +40,12 @@
     <section class="flagged-comments p-4">
         <header class="mb-4">
             <h3>Commentaires signalés</h3>
-            <?php if (empty($flaggedComments)): ?>
+            <?php if (empty($flaggedComments)) : ?>
             <p>Pas de commentaire signalé.</p>
             <?php endif; ?>
         </header>
 
-        <?php foreach ($flaggedComments as $flaggedComment): ?>
+        <?php foreach ($flaggedComments as $flaggedComment) : ?>
             <article class="comment mb-4">
                 <header class="comment__header">
                     <h5 class="comment__heading">

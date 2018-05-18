@@ -7,18 +7,15 @@ class PostManager extends Manager
     {
         $sql = 'SELECT id, title, content, DATE_FORMAT(dateAdded, \'%d/%m/%Y\') AS dateAdded, dateModified FROM posts ORDER BY dateAdded';
         
-        if (isset($params['order']))
-        {
+        if (isset($params['order'])) {
             $sql .= ' ' . strtoupper($params['order']);
         }
 
-        if (isset($params['limit']))
-        {
+        if (isset($params['limit'])) {
             $sql .= ' LIMIT ' . (int) $params['limit'];
         }
         
-        if (isset($params['offset']))
-        {
+        if (isset($params['offset'])) {
             $sql .= ' OFFSET ' . (int) $params['offset'];
         }
 
@@ -44,7 +41,7 @@ class PostManager extends Manager
         return $post ? $post : null;
     }
     
-    public function getPrevious($id) : ?Post 
+    public function getPrevious($id) : ?Post
     {
         $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id < :id ORDER BY id DESC LIMIT 1';
 
@@ -59,7 +56,7 @@ class PostManager extends Manager
         return $post ? $post : null;
     }
 
-    public function getNext($id) : ?Post 
+    public function getNext($id) : ?Post
     {
         $sql = 'SELECT id, title, content, dateAdded FROM posts WHERE id > :id LIMIT 1';
 
@@ -115,6 +112,6 @@ class PostManager extends Manager
 
         $rows = (int) $req->fetchColumn();
 
-        return $rows; 
+        return $rows;
     }
 }

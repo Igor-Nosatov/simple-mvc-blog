@@ -3,8 +3,8 @@ namespace App\Model;
 
 class User extends Entity
 {
-    private $username,
-            $password;
+    private $username;
+    private $password;
 
     const PASSWORD_INVALID = 'Mot de passe invalide';
     const PASSWORD_TOO_SHORT = 'Le mot de passe doit contenir au moins 5 caractères';
@@ -31,28 +31,20 @@ class User extends Entity
 
     public function setUsername($userame)
     {
-        if (is_string($username))
-        {
+        if (is_string($username)) {
             $this->username = $username;
         }
     }
 
     public function setPassword($password)
     {
-        if (!is_string($password))
-        {
+        if (!is_string($password)) {
             $this->errors[] = self::PASSWORD_INVALID;
-        }
-        else if (empty($password))
-        {
+        } elseif (empty($password)) {
             $this->errors[] = self::PASSWORD_EMPTY;
-        }
-        else if (mb_strlen($password) < 5)
-        {
+        } elseif (mb_strlen($password) < 5) {
             $this->errors[] = self::PASSWORD_TOO_SHORT;
-        }
-        else
-        {
+        } else {
             $this->password = password_hash($password, PASSWORD_DEFAULT);
         }
     }
