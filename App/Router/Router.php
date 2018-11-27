@@ -13,6 +13,7 @@ class Router
     /**
      * Checks all the routes for one matching the url
      *
+     * @throws \Exception
      * @param string $url
      * @return Route the matching route
      */

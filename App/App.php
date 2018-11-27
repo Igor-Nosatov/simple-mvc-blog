@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use \App\Router\{Router, Route, HTTPRequest, HTTPResponse};
+
 class App
 {
     private $router;
@@ -10,9 +12,9 @@ class App
 
     public function __construct()
     {
-        $this->router = new \App\Router\Router();
-        $this->httpRequest= new \App\Router\HTTPRequest();
-        $this->httpResponse = new \App\Router\HTTPResponse();
+        $this->router = new Router();
+        $this->httpRequest= new HTTPRequest();
+        $this->httpResponse = new HTTPResponse();
     }
 
     public function run()
@@ -22,7 +24,7 @@ class App
         $routes = require('../App/Config/routes.php');
        
         foreach ($routes as $route) {
-            $this->router->addRoute(new \App\Router\Route($route));
+            $this->router->addRoute(new Route($route));
         }
         
         try {

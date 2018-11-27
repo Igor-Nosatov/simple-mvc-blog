@@ -22,7 +22,7 @@ class UserController extends Controller
         $username = $req->postData('username');
         $password = $req->postData('password');
 
-        $user = $this->userManager->getByUsername($username, $password);
+        $user = $this->userManager->getByUsername($username);
 
         if (!$user || !password_verify($password, $user->getPassword())) {
             $this->flash->set('Login ou mot de passe invalide', 'danger');

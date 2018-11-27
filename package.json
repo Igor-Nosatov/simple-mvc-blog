@@ -12,14 +12,14 @@
     "url": "git+https://github.com/mcoudurier/simple-MVC-blog.git"
   },
   "author": "Mathieu Coudurier",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mcoudurier/simple-MVC-blog/issues"
   },
   "homepage": "https://github.com/mcoudurier/simple-MVC-blog#readme",
   "devDependencies": {
     "bootstrap": "^4.1.3",
-    "node-sass": "^4.9.3"
+    "node-sass": "^4.10.0"
   },
   "dependencies": {}
 }

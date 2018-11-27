@@ -1,10 +1,6 @@
 <?php
 namespace App\Controller;
 
-use \App\Model\Post;
-use \App\Model\Comment;
-use \App\Router\HTTPRequest;
-
 class Controller
 {
     protected $postManager;

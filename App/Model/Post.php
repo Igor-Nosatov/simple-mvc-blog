@@ -49,12 +49,12 @@ class Post extends Entity
         }
     }
 
-    public function setDateAdded(DateTime $dateAdded)
+    public function setDateAdded(\DateTime $dateAdded)
     {
         $this->dateAdded = $dateAdded;
     }
 
-    public function setDateModified(DateTime $dateModified)
+    public function setDateModified(\DateTime $dateModified)
     {
         $this->dateModified = $dateModified;
     }

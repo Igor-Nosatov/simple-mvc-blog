@@ -1,3 +1,4 @@
 App/Config/database.php
 public/img
 node_modules/
+.idea

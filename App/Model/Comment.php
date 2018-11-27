@@ -63,7 +63,7 @@ class Comment extends Entity
         }
     }
 
-    public function setDateAdded(DateTime $dateAdded)
+    public function setDateAdded(\DateTime $dateAdded)
     {
         $this->dateAdded = $dateAdded;
     }

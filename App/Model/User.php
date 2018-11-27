@@ -29,7 +29,7 @@ class User extends Entity
 
     // SETTERS
 
-    public function setUsername($userame)
+    public function setUsername($username)
     {
         if (is_string($username)) {
             $this->username = $username;
