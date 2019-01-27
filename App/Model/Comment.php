@@ -9,8 +9,8 @@ class Comment extends Entity
     private $dateAdded;
     private $flag;
 
-    const AUTHOR_INVALID = 1;
-    const CONTENT_INVALID = 2;
+    private const AUTHOR_INVALID = 1;
+    private const CONTENT_INVALID = 2;
 
     // GETTERS
 
@@ -36,7 +36,7 @@ class Comment extends Entity
 
     // SETTERS
 
-    public function setPostId($postId)
+    public function setPostId($postId): void
     {
         $postId = (int) $postId;
 
@@ -45,7 +45,7 @@ class Comment extends Entity
         }
     }
 
-    public function setAuthor($author)
+    public function setAuthor($author): void
     {
         if (is_string($author) && !empty($author)) {
             $this->author = $author;
@@ -54,7 +54,7 @@ class Comment extends Entity
         }
     }
 
-    public function setContent($content)
+    public function setContent($content): void
     {
         if (is_string($content) && !empty($content)) {
             $this->content = $content;
@@ -63,12 +63,12 @@ class Comment extends Entity
         }
     }
 
-    public function setDateAdded(\DateTime $dateAdded)
+    public function setDateAdded(\DateTime $dateAdded): void
     {
         $this->dateAdded = $dateAdded;
     }
 
-    public function setFlag($flag)
+    public function setFlag($flag): void
     {
         $this->flag = (int) $flag;
     }

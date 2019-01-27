@@ -6,12 +6,12 @@ use \App\Router\HTTPRequest;
 
 class PostController extends Controller
 {
-    public function notFound()
+    public function notFound(): void
     {
         $this->show('../App/View/404.php');
     }
     
-    public function listPosts(HTTPRequest $req)
+    public function listPosts(HTTPRequest $req): void
     {
         // Posts per page
         $limit = 5;
@@ -39,7 +39,7 @@ class PostController extends Controller
         }
     }
 
-    public function post(HTTPRequest $req)
+    public function post(HTTPRequest $req): void
     {
         $id = $req->getData('id');
 
@@ -56,12 +56,12 @@ class PostController extends Controller
         }
     }
     
-    public function writePost()
+    public function writePost(): void
     {
         $this->show('../App/View/writePost.php');
     }
     
-    public function addPost(HTTPRequest $req)
+    public function addPost(HTTPRequest $req): void
     {
         $post = new Post([
             'title' => $req->postData('title'),
@@ -75,7 +75,7 @@ class PostController extends Controller
         $this->httpResponse->redirect('/admin');
     }
     
-    public function deletePost(HTTPRequest $req)
+    public function deletePost(HTTPRequest $req): void
     {
         $this->postManager->delete($req->getData('id'));
 
@@ -84,13 +84,13 @@ class PostController extends Controller
         $this->httpResponse->redirect('/admin');
     }
 
-    public function updatePost(HTTPRequest $req)
+    public function updatePost(HTTPRequest $req): void
     {
         $post = $this->postManager->getSingle($req->getData('id'));
         $this->show('../App/View/updatePost.php', compact('post'));
     }
 
-    public function executeUpdatePost(HTTPRequest $req)
+    public function executeUpdatePost(HTTPRequest $req): void
     {
         $post = new Post([
             'id' => $req->getData('id'),
@@ -105,11 +105,11 @@ class PostController extends Controller
         $this->httpResponse->redirect('/admin');
     }
     
-    public function imgUploadTinyMCE()
+    public function imgUploadTinyMCE(): void
     {
         $accepted_origins = array('http://' . $_SERVER['SERVER_NAME']);
 
-        $imageFolder = "img/uploads/";
+        $imageFolder = 'img/uploads/';
 
         reset($_FILES);
         $temp = current($_FILES);
@@ -120,20 +120,20 @@ class PostController extends Controller
                 if (in_array($_SERVER['HTTP_ORIGIN'], $accepted_origins)) {
                     header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
                 } else {
-                    header("HTTP/1.0 403 Origin Denied");
+                    header('HTTP/1.0 403 Origin Denied');
                     return;
                 }
             }
 
             // Sanitize input
             if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $temp['name'])) {
-                header("HTTP/1.0 500 Invalid file name.");
+                header('HTTP/1.0 500 Invalid file name.');
                 return;
             }
 
             // Verify extension
-            if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
-                header("HTTP/1.0 500 Invalid extension.");
+            if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array('gif', 'jpg', 'png'))) {
+                header('HTTP/1.0 500 Invalid extension.');
                 return;
             }
 
@@ -145,7 +145,7 @@ class PostController extends Controller
             echo json_encode(array('location' => $filetowrite));
         } else {
             // Notify editor that the upload failed
-            header("HTTP/1.0 500 Server Error");
+            header('HTTP/1.0 500 Server Error');
         }
     }
 }

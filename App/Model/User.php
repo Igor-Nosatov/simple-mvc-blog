@@ -6,11 +6,11 @@ class User extends Entity
     private $username;
     private $password;
 
-    const PASSWORD_INVALID = 'Mot de passe invalide';
-    const PASSWORD_TOO_SHORT = 'Le mot de passe doit contenir au moins 5 caractères';
-    const PASSWORD_EMPTY = 'Le mot de passe ne peut pas être vide';
+    private const PASSWORD_INVALID = 'Mot de passe invalide';
+    private const PASSWORD_TOO_SHORT = 'Le mot de passe doit contenir au moins 5 caractères';
+    private const PASSWORD_EMPTY = 'Le mot de passe ne peut pas être vide';
     
-    public function login()
+    public function login(): void
     {
         $_SESSION['id'] = $this->id;
     }
@@ -29,14 +29,14 @@ class User extends Entity
 
     // SETTERS
 
-    public function setUsername($username)
+    public function setUsername($username): void
     {
         if (is_string($username)) {
             $this->username = $username;
         }
     }
 
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         if (!is_string($password)) {
             $this->errors[] = self::PASSWORD_INVALID;

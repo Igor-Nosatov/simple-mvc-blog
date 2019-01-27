@@ -1,7 +1,10 @@
 <?php
 namespace App;
 
-use \App\Router\{Router, Route, HTTPRequest, HTTPResponse};
+use \App\Router\Router;
+use \App\Router\Route;
+use \App\Router\HTTPRequest;
+use \App\Router\HTTPResponse;
 
 class App
 {
@@ -13,15 +16,15 @@ class App
     public function __construct()
     {
         $this->router = new Router();
-        $this->httpRequest= new HTTPRequest();
+        $this->httpRequest = new HTTPRequest();
         $this->httpResponse = new HTTPResponse();
     }
 
-    public function run()
+    public function run(): void
     {
         session_start();
 
-        $routes = require('../App/Config/routes.php');
+        $routes = require __DIR__ . '/Config/routes.php';
        
         foreach ($routes as $route) {
             $this->router->addRoute(new Route($route));
@@ -30,7 +33,7 @@ class App
         try {
             $route = $this->router->getRoute($this->httpRequest->getURI());
         } catch (\Exception $e) {
-            if ($e->getCode() == '404') {
+            if ($e->getCode() === '404') {
                 $this->httpResponse->redirect404();
             }
         }

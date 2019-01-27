@@ -7,7 +7,7 @@ class Flash
     private $type;
     private $message;
 
-    public function set(string $message, string $type = 'success')
+    public function set(string $message, string $type = 'success'): void
     {
         $this->message = $message;
         $this->type = $type;
@@ -27,7 +27,7 @@ class Flash
     {
         $flash = $_SESSION['flash'];
 
-        $html = '<div class="alert alert-' . $flash['type'] .' alert-dismissible fade show">';
+        $html = '<div class="alert alert-' . $flash['type'] . ' alert-dismissible fade show">';
         $html .= $flash['message'];
         $html .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
         $html .= '<span aria-hidden="true">&times;</span>';

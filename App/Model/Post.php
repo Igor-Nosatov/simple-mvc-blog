@@ -35,26 +35,26 @@ class Post extends Entity
     
     // SETTERS
 
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         if (is_string($title)) {
             $this->title = $title;
         }
     }
 
-    public function setContent($content)
+    public function setContent($content): void
     {
         if (is_string($content)) {
             $this->content = $content;
         }
     }
 
-    public function setDateAdded(\DateTime $dateAdded)
+    public function setDateAdded(\DateTime $dateAdded): void
     {
         $this->dateAdded = $dateAdded;
     }
 
-    public function setDateModified(\DateTime $dateModified)
+    public function setDateModified(\DateTime $dateModified): void
     {
         $this->dateModified = $dateModified;
     }

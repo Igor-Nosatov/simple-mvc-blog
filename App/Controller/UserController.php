@@ -5,19 +5,19 @@ use \App\Router\HTTPRequest;
 
 class UserController extends Controller
 {
-    public function login()
+    public function login(): void
     {
         $this->show('../App/View/login.php');
     }
 
-    public function logout()
+    public function logout(): void
     {
         unset($_SESSION['id']);
         $this->flash->set('Vous êtes déconnecté');
         $this->httpResponse->redirect('/');
     }
 
-    public function authenticate(HTTPRequest $req)
+    public function authenticate(HTTPRequest $req): void
     {
         $username = $req->postData('username');
         $password = $req->postData('password');
@@ -34,19 +34,19 @@ class UserController extends Controller
         }
     }
     
-    public function adminPanel()
+    public function adminPanel(): void
     {
         $flaggedComments = $this->commentManager->getFlagged();
         $posts = $this->postManager->getPosts();
         $this->show('../App/View/adminPanel.php', compact('flaggedComments', 'posts'));
     }
     
-    public function changePassword()
+    public function changePassword(): void
     {
         $this->show('../App/View/changePassword.php');
     }
 
-    public function executeChangePassword(HTTPRequest $req)
+    public function executeChangePassword(HTTPRequest $req): void
     {
         $userId = $_SESSION['id'];
     

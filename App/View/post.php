@@ -10,13 +10,13 @@
         <?= $post->getContent() ?>
     </div>
     <footer class="post__footer d-flex">
-        <?php if (!is_null($previousPost)) : ?>
+        <?php if ($previousPost !== null) : ?>
             <a href="/post/<?= $previousPost->getId() ?>" class="post__previous mr-auto">
                 <i class="fas fa-long-arrow-alt-left mr-1"></i>
                 Précédent
             </a> 
         <?php endif; ?>
-        <?php if (!is_null($nextPost)) : ?>
+        <?php if ($nextPost !== null) : ?>
             <a href="/post/<?= $nextPost->getId() ?>" class="post__next ml-auto">
                 Suivant
                 <i class="fas fa-long-arrow-alt-right ml-1"></i>
@@ -41,7 +41,7 @@
                     <a href="/flagComment/<?= $comment->getId() ?>" class="comment__action" title="Signaler">
                         <i class="fas fa-ban"></i>
                     </a>
-                <?php elseif (isset($_SESSION['id'])) : ?>
+                <?php else : ?>
                     <a href="/admin/deleteComment/<?= $comment->getId() ?>" class="comment__action" title="Supprimer">
                         <i class="fas fa-trash"></i>
                     </a>

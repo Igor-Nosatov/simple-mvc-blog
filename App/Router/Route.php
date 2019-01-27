@@ -20,28 +20,28 @@ class Route
         $this->setMiddleware($data['middleware']);
     }
 
-    public function setUrl($url)
+    public function setUrl($url): void
     {
         if (is_string($url)) {
             $this->url = $url;
         }
     }
     
-    public function setController($controller)
+    public function setController($controller): void
     {
         if (is_string($controller)) {
             $this->controller = $controller;
         }
     }
 
-    public function setAction($action)
+    public function setAction($action): void
     {
         if (is_string($action)) {
             $this->action = $action;
         }
     }
 
-    public function setMiddleware($middleware)
+    public function setMiddleware($middleware): void
     {
         if (is_string($middleware)) {
             $this->middleware = $middleware;
@@ -87,11 +87,7 @@ class Route
         $values = [];
        
         if (!$this->hasVars()) {
-            if ($this->url == $url) {
-                return true;
-            } else {
-                return false;
-            }
+            return $this->url === $url;
         }
 
         $urlParts = explode('/', $this->url);
@@ -116,14 +112,12 @@ class Route
                 // Try to match the pattern with the provided url in the same position
                 if (!preg_match('#' . $pattern . '#', $url[$i], $matches)) {
                     return false;
-                } else {
-                    $values[] = $url[$i];
                 }
-            } else // If there is no variable in the current position, do a simple string comparison
-            {
-                if ($url[$i] !== $urlParts[$i]) {
+
+                $values[] = $url[$i];
+
+            } else if ($url[$i] !== $urlParts[$i]) { // If there is no variable in the current position, do a simple string comparison
                     return false;
-                }
             }
         }
         

@@ -13,7 +13,7 @@ abstract class Entity
         }
     }
 
-    public function hydrate(array $data)
+    public function hydrate(array $data): void
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -24,7 +24,7 @@ abstract class Entity
         }
     }
 
-    public function hasErrors()
+    public function hasErrors(): bool
     {
         return !empty($this->errors);
     }
@@ -34,7 +34,7 @@ abstract class Entity
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $id = (int) $id;
 
@@ -43,7 +43,7 @@ abstract class Entity
         }
     }
 
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

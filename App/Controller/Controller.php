@@ -1,6 +1,12 @@
 <?php
 namespace App\Controller;
 
+use \App\Model\PostManager;
+use \App\Model\CommentManager;
+use \App\Model\UserManager;
+use \App\Router\HTTPResponse;
+use \App\Model\Flash;
+
 class Controller
 {
     protected $postManager;
@@ -11,23 +17,23 @@ class Controller
 
     public function __construct()
     {
-        $this->postManager = new \App\Model\PostManager();
-        $this->commentManager = new \App\Model\CommentManager();
-        $this->userManager = new \App\Model\UserManager();
-        $this->httpResponse = new \App\Router\HTTPResponse();
-        $this->flash = new \App\Model\Flash();
+        $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
+        $this->userManager = new UserManager();
+        $this->httpResponse = new HTTPResponse();
+        $this->flash = new Flash();
     }
 
-    protected function show(string $contentFile, array $vars = [])
+    protected function show(string $contentFile, array $vars = []): void
     {
         $flash = $this->flash;
 
         extract($vars);
 
         ob_start();
-        require($contentFile);
+        require $contentFile;
         $content = ob_get_clean();
 
-        require('../App/View/template.php');
+        require __DIR__ . '/../View/template.php';
     }
 }

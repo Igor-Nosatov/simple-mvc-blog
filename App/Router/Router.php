@@ -5,7 +5,7 @@ class Router
 {
     private $routes = [];
 
-    public function addRoute(Route $route)
+    public function addRoute(Route $route): void
     {
         $this->routes[] = $route;
     }

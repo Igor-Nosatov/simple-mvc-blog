@@ -1,4 +1,5 @@
 <?php
+use App\Router\Authenticate;
 
 return [
     [
@@ -41,7 +42,7 @@ return [
         'url' => '/admin',
         'controller' => 'UserController',
         'action' => 'adminPanel',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/login',
@@ -59,66 +60,66 @@ return [
         'url' => '/admin/addPost',
         'controller' => 'PostController',
         'action' => 'addPost',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/updatePost/{id:[0-9]+}',
         'controller' => 'PostController',
         'action' => 'updatePost',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/executeUpdatePost/{id:[0-9]+}',
         'controller' => 'PostController',
         'action' => 'executeUpdatePost',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/deletePost/{id:[0-9]+}',
         'controller' => 'PostController',
         'action' => 'deletePost',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/deleteComment/{id:[0-9]+}',
         'controller' => 'CommentController',
         'action' => 'deleteComment',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/unflagComment/{id:[0-9]+}',
         'controller' => 'CommentController',
         'action' => 'unflagComment',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/writePost',
         'controller' => 'PostController',
         'action' => 'writePost',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/imgUploadTinyMCE',
         'controller' => 'PostController',
         'action' => 'imgUploadTinyMCE',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/changePassword',
         'controller' => 'UserController',
         'action' => 'changePassword',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/executeChangePassword',
         'controller' => 'UserController',
         'action' => 'executeChangePassword',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ],
     [
         'url' => '/admin/logout',
         'controller' => 'UserController',
         'action' => 'logout',
-        'middleware' => '\App\Router\Authenticate',
+        'middleware' => Authenticate::class,
     ]
 ];

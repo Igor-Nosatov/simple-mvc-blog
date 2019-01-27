@@ -6,7 +6,7 @@ use \App\Router\HTTPRequest;
 
 class CommentController extends Controller
 {
-    public function addComment(HTTPRequest $req)
+    public function addComment(HTTPRequest $req): void
     {
         $comment = new Comment([
             'postId' => $req->getData('id'),
@@ -24,7 +24,7 @@ class CommentController extends Controller
         $this->httpResponse->redirect('/post/' . $req->getData('id'));
     }
     
-    public function deleteComment(HTTPRequest $req)
+    public function deleteComment(HTTPRequest $req): void
     {
         $this->commentManager->delete($req->getData('id'));
 
@@ -33,7 +33,7 @@ class CommentController extends Controller
         $this->httpResponse->redirect('/admin');
     }
     
-    public function flagComment(HTTPRequest $req)
+    public function flagComment(HTTPRequest $req): void
     {
         $id = $req->getData('id');
 
@@ -41,12 +41,16 @@ class CommentController extends Controller
 
         $comment = $this->commentManager->getSingle($req->getData('id'));
 
+        if (!$comment) {
+            $this->httpResponse->redirect404();
+        }
+
         $this->flash->set('Commentaire signalé');
 
         $this->httpResponse->redirect('/post/' . $comment->getPostId());
     }
     
-    public function unflagComment(HTTPRequest $req)
+    public function unflagComment(HTTPRequest $req): void
     {
         $this->commentManager->unflag($req->getData('id'));
 

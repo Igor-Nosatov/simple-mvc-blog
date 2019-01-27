@@ -21,9 +21,7 @@ class PostManager extends Manager
 
         $req = $this->db->query($sql);
         
-        $posts = $req->fetchAll(\PDO::FETCH_CLASS, '\App\Model\Post');
-
-        return $posts;
+        return $req->fetchAll(\PDO::FETCH_CLASS, Post::class);
     }
     
     public function getSingle($id) : ?Post
@@ -35,10 +33,10 @@ class PostManager extends Manager
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Post');
+        $req->setFetchMode(\PDO::FETCH_CLASS, Post::class);
         $post = $req->fetch();
 
-        return $post ? $post : null;
+        return $post ?: null;
     }
     
     public function getPrevious($id) : ?Post
@@ -50,10 +48,10 @@ class PostManager extends Manager
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
         
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Post');
+        $req->setFetchMode(\PDO::FETCH_CLASS, Post::class);
         $post = $req->fetch();
 
-        return $post ? $post : null;
+        return $post ?: null;
     }
 
     public function getNext($id) : ?Post
@@ -65,13 +63,13 @@ class PostManager extends Manager
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
         
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Post');
+        $req->setFetchMode(\PDO::FETCH_CLASS, Post::class);
         $post = $req->fetch();
 
-        return $post ? $post : null;
+        return $post ?: null;
     }
 
-    public function add(Post $post)
+    public function add(Post $post): void
     {
         $sql = 'INSERT INTO posts SET title = :title, content = :content, dateAdded = NOW()';
 
@@ -82,7 +80,7 @@ class PostManager extends Manager
         $req->execute();
     }
 
-    public function update(Post $post)
+    public function update(Post $post): void
     {
         $sql = 'UPDATE posts SET title = :title, content = :content, dateModified = NOW() WHERE id = :id';
 
@@ -94,7 +92,7 @@ class PostManager extends Manager
         $req->execute();
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         $sql = 'DELETE FROM posts WHERE id = :id';
 
@@ -110,8 +108,6 @@ class PostManager extends Manager
 
         $req = $this->db->query($sql);
 
-        $rows = (int) $req->fetchColumn();
-
-        return $rows;
+        return (int) $req->fetchColumn();
     }
 }

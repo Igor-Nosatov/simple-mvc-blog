@@ -12,10 +12,10 @@ class UserManager extends Manager
         $req->bindValue(':username', $username, \PDO::PARAM_STR);
         $req->execute();
 
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\User');
+        $req->setFetchMode(\PDO::FETCH_CLASS, User::class);
         $user = $req->fetch();
 
-        return $user ? $user : null;
+        return $user ?: null;
     }
 
     public function getById($id) : ?User
@@ -27,13 +27,13 @@ class UserManager extends Manager
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\User');
+        $req->setFetchMode(\PDO::FETCH_CLASS, User::class);
         $user = $req->fetch();
 
-        return $user ? $user : null;
+        return $user ?: null;
     }
 
-    public function updatePassword(User $user)
+    public function updatePassword(User $user): void
     {
         $sql = 'UPDATE users SET password = :password WHERE id = :id';
 

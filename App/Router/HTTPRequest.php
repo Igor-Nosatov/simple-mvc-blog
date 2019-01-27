@@ -10,16 +10,16 @@ class HTTPRequest
 
     public function postData($key)
     {
-        return isset($_POST[$key]) ? $_POST[$key] : null;
+        return $_POST[$key] ?? null;
     }
 
     public function getData($key)
     {
-        return isset($_GET[$key]) ? $_GET[$key] : null;
+        return $_GET[$key] ?? null;
     }
 
     public function isAjax() : bool
     {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 }

@@ -7,7 +7,6 @@ namespace App\Model;
 class Paginator
 {
     private $limit;
-    private $offset;
     private $page;
     private $postsTotal;
     private $pagesTotal;
@@ -35,7 +34,7 @@ class Paginator
      */
     public function offset() : int
     {
-        return $this->limit * ($this->page -1);
+        return $this->limit * ($this->page - 1);
     }
 
     /**
@@ -104,7 +103,7 @@ class Paginator
         $html = '';
 
         for ($i = 1; $i < $this->pagesTotal + 1; $i++) {
-            if ($i == $this->page) {
+            if ($i === $this->page) {
                 $html .= '<li class="page-item active">';
             } else {
                 $html .= '<li class="page-item">';

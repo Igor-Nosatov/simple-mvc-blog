@@ -12,10 +12,9 @@ class CommentManager extends Manager
         $req->bindValue(':postId', $postId, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Comment');
-        $comments = $req->fetchAll();
+        $req->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
 
-        return $comments;
+        return $req->fetchAll();
     }
 
     public function getSingle($id) : ?Comment
@@ -27,13 +26,13 @@ class CommentManager extends Manager
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Comment');
+        $req->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
         $comment = $req->fetch();
 
-        return $comment ? $comment : null;
+        return $comment ?: null;
     }
 
-    public function add(Comment $comment)
+    public function add(Comment $comment): void
     {
         $sql = 'INSERT INTO comments SET postId = :postId, author = :author, content = :content, dateAdded = NOW()';
 
@@ -45,7 +44,7 @@ class CommentManager extends Manager
         $req->execute();
     }
 
-    public function update(Comment $comment)
+    public function update(Comment $comment): void
     {
         $sql = 'UPDATE comments SET content = :content WHERE id = :id';
 
@@ -56,7 +55,7 @@ class CommentManager extends Manager
         $req->execute();
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         $sql = 'DELETE FROM comments WHERE id = :id';
 
@@ -66,7 +65,7 @@ class CommentManager extends Manager
         $req->execute();
     }
 
-    public function flag($id)
+    public function flag($id): void
     {
         $sql = 'UPDATE comments SET flag = 1 WHERE id = :id';
         
@@ -76,7 +75,7 @@ class CommentManager extends Manager
         $req->execute();
     }
     
-    public function unflag($id)
+    public function unflag($id): void
     {
         $sql = 'UPDATE comments SET flag = 0 WHERE id = :id';
         
@@ -90,12 +89,8 @@ class CommentManager extends Manager
     {
         $sql = 'SELECT * FROM comments WHERE flag > 0';
 
-        $req = $this->db->prepare($sql);
-        $req->execute();
+        $req = $this->db->query($sql, \PDO::FETCH_CLASS, Comment::class);
 
-        $req->setFetchMode(\PDO::FETCH_CLASS, '\App\Model\Comment');
-        $comments = $req->fetchAll();
-
-        return $comments;
+        return $req->fetchAll();
     }
 }
