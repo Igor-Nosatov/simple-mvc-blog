@@ -1,0 +1,9 @@
+{
+    "name": "mcoudurier/simple-MVC-blog",
+    "description": "Small blog written in pure PHP.",
+    "type": "project",
+    "license": "MIT",
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    }
+}

@@ -10,14 +10,18 @@ class Route
     private $controller;
     private $action;
     private $middleware;
-    private $params = [];
+    private $constraints;
+    private $vars = [];
 
-    public function __construct(array $data)
+    public function __construct(array $routeParams)
     {
-        $this->setUrl($data['url']);
-        $this->setController($data['controller']);
-        $this->setAction($data['action']);
-        $this->setMiddleware($data['middleware']);
+        foreach ($routeParams as $key => $routeParam) {
+            $method = 'set' . ucfirst($key);
+
+            if (method_exists($this, $method)) {
+                $this->$method($routeParam);
+            }
+        }
     }
 
     public function setUrl($url): void
@@ -27,25 +31,38 @@ class Route
         }
     }
     
-    public function setController($controller): void
+    public function setController($controller): self
     {
         if (is_string($controller)) {
             $this->controller = $controller;
         }
+
+        return $this;
     }
 
-    public function setAction($action): void
+    public function setConstraints(array $constraints) : self
+    {
+        $this->constraints = $constraints;
+
+        return $this;
+    }
+
+    public function setAction($action): self
     {
         if (is_string($action)) {
             $this->action = $action;
         }
+
+        return $this;
     }
 
-    public function setMiddleware($middleware): void
+    public function setMiddleware($middleware): self
     {
         if (is_string($middleware)) {
             $this->middleware = $middleware;
         }
+
+        return $this;
     }
 
     public function getUrl() : string
@@ -63,71 +80,74 @@ class Route
         return $this->controller;
     }
 
-    public function getMiddleware() : string
+    public function getMiddleware() : ?string
     {
         return $this->middleware;
     }
 
-    public function getParams() : array
+    public function getConstraints() : array
     {
-        return $this->params;
+        return $this->constraints;
     }
-    
+
+    public function getVars() : array
+    {
+        return $this->vars;
+    }
+
+    private function isVar($urlFragment) : bool
+    {
+        return strpos($urlFragment, '{') !== false;
+    }
+
+    private function matchVar(string $regex, string $urlFragment) : bool
+    {
+        return preg_match('/^' . $regex . '$/', $urlFragment) === 1;
+    }
+
+    private function varName($urlFragment) : string
+    {
+        return trim($urlFragment, '{}');
+    }
+
+    private function addVar(string $name, string $data) : void
+    {
+        $this->vars[$name] = $data;
+    }
+
     /**
-     * Tries to match the route with the provided url.
-     * Compare both urls part by part then set the variables and notifies the router
-     * the route matches if everything checks out.
-     *
      * @param string $url
      * @return boolean
      */
-    public function get(string $url) : bool
+    public function match(string $url) : bool
     {
-        $keys = [];
-        $values = [];
-       
-        if (!$this->hasVars()) {
+        if (!$this->constraints) {
             return $this->url === $url;
         }
 
-        $urlParts = explode('/', $this->url);
-        $url = explode('/', $url);
+        $partsProvided = explode('/', trim($url, '/'));
+        $partsToMatch = explode('/', trim($this->url, '/'));
 
-        // If both urls don't have the same number of parts, we can return now
-        if (count($urlParts) !== count($url)) {
+        if (count($partsToMatch) !== count($partsProvided)) {
             return false;
         }
 
-        // The first element is always empty
-        for ($i = 1; $i < count($urlParts); $i++) {
-            // If an opening bracket is found, retrieve the parameter
-            if ($urlParts[$i][0] === '{') {
-                // Split the key and pattern
-                $keyPattern = explode(':', $urlParts[$i]);
-                // Remove the opening bracket
-                $keys[] = substr($keyPattern[0], 1);
-                // Remove the closing bracket
-                $pattern = substr($keyPattern[1], 0, -1);
+        foreach ($partsToMatch as $key => $toMatch) {
+            if ($partsProvided[$key] !== $toMatch && !$this->isVar($toMatch)) {
+                return false;
+            }
 
-                // Try to match the pattern with the provided url in the same position
-                if (!preg_match('#' . $pattern . '#', $url[$i], $matches)) {
+            if ($this->isVar($toMatch)) {
+                $var = $this->varName($toMatch);
+
+                if (!$this->matchVar($this->constraints[$var], $partsProvided[$key])) {
                     return false;
                 }
 
-                $values[] = $url[$i];
-
-            } else if ($url[$i] !== $urlParts[$i]) { // If there is no variable in the current position, do a simple string comparison
-                    return false;
+                $this->addVar($var, $partsProvided[$key]);
             }
         }
-        
-        $this->params = array_combine($keys, $values);
 
         return true;
-    }
-
-    private function hasVars()
-    {
-        return strpos($this->url, '{');
     }
 }

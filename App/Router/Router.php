@@ -3,27 +3,43 @@ namespace App\Router;
 
 class Router
 {
-    private $routes = [];
+    /**
+     * @var Route[] $routes
+     */
+    private $routes;
 
-    public function addRoute(Route $route): void
+    public function __construct()
     {
-        $this->routes[] = $route;
+        $this->routes = $this->fetchRoutes();
     }
 
     /**
-     * Checks all the routes for one matching the url
-     *
-     * @throws \Exception
-     * @param string $url
-     * @return Route the matching route
+     * @return Route[]
      */
-    public function getRoute(string $url) : Route
+    private function fetchRoutes() : array
+    {
+        $configuredRoutes = require __DIR__ . '/../Config/routes.php';
+        $routes = [];
+
+        foreach ($configuredRoutes as $configuredRoute) {
+            $routes[] = new Route($configuredRoute);
+        }
+
+        return $routes;
+    }
+
+    /**
+     * @param string $url
+     * @return Route|null
+     */
+    public function getRoute(string $url) : ?Route
     {
         foreach ($this->routes as $route) {
-            if ($route->get($url)) {
+            if ($route->match($url)) {
                 return $route;
             }
         }
-        throw new \Exception('No route', 404);
+
+        return null;
     }
 }

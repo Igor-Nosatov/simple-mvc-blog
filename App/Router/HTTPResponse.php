@@ -11,8 +11,8 @@ class HTTPResponse
 
     public function redirect404(): void
     {
-        header('HTTP/1.0 404 Not Found');
-        header('Location: /404');
+        http_response_code(404);
+        $this->redirect('/404');
         exit;
     }
 
