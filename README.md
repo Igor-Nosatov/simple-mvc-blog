@@ -9,8 +9,8 @@ Small blog written in pure php.
 
 #### Development
 ```
-npm install
-npm run compile-css
+$ npm install
+$ npm run build
 ```
 
 ## Built with

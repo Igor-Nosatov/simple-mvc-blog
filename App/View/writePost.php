@@ -11,6 +11,3 @@
     </div>
     <input type="submit" value="Valider" class="btn btn-primary">
 </form>
-
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script src="/js/tinymce/init.js"></script>

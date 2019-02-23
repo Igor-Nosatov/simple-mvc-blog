@@ -4,8 +4,7 @@
   "description": "Small blog written in pure PHP.",
   "main": "index.js",
   "scripts": {
-    "compile-css": "node-sass --output-style compressed assets/scss/main.scss public/css/style.css",
-    "watch-css": "node-sass -w --output-style compressed assets/scss/main.scss public/css/style.css"
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +17,18 @@
   },
   "homepage": "https://github.com/mcoudurier/simple-MVC-blog#readme",
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2",
     "bootstrap": "^4.3.1",
-    "node-sass": "^4.11.0"
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "jquery": "^3.3.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "popper.js": "^1.14.7",
+    "sass-loader": "^7.1.0",
+    "tinymce": "^5.0.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {}
 }

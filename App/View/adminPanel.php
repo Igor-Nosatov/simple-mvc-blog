@@ -84,5 +84,3 @@
         </div>
     </div>
 </section>
-
-<script src="js/confirm.js"></script>

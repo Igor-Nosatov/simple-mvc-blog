@@ -50,4 +50,3 @@
     </div>
 </div>
 
-<script src="/js/dropdown.js"></script>
