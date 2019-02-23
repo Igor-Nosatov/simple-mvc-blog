@@ -12,7 +12,7 @@ $link-hover-decoration: none;
 
 $line-height-base: 1.61;
 
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 a {
     transition: all, .3s;

@@ -4,8 +4,8 @@
   "description": "Small blog written in pure PHP.",
   "main": "index.js",
   "scripts": {
-    "compile-css": "node-sass --output-style compressed sass/main.scss public/css/style.css",
-    "watch-css": "node-sass -w --output-style compressed sass/main.scss public/css/style.css"
+    "compile-css": "node-sass --output-style compressed assets/scss/main.scss public/css/style.css",
+    "watch-css": "node-sass -w --output-style compressed assets/scss/main.scss public/css/style.css"
   },
   "repository": {
     "type": "git",
