@@ -42,7 +42,7 @@ class User extends Entity
             $this->errors[] = self::PASSWORD_INVALID;
         } elseif (empty($password)) {
             $this->errors[] = self::PASSWORD_EMPTY;
-        } elseif (mb_strlen($password) < 5) {
+        } elseif (strlen($password) < 5) {
             $this->errors[] = self::PASSWORD_TOO_SHORT;
         } else {
             $this->password = password_hash($password, PASSWORD_DEFAULT);
