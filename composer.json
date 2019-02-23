@@ -1,8 +1,13 @@
 {
-    "name": "mcoudurier/simple-MVC-blog",
+    "name": "mcoudurier/simple-mvc-blog",
     "description": "Small blog written in pure PHP.",
     "type": "project",
     "license": "MIT",
+    "require": {
+        "php": "^7.1",
+        "ext-pdo": "*",
+        "ext-json": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7.5"
     }
