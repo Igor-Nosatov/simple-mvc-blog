@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    mode: "development",
+    mode: "production",
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -13,6 +15,20 @@ module.exports = {
             filename: "../css/[name].css",
         })
     ],
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: false,
+            }),
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorPluginOptions: {
+                    preset: ['default', { discardComments: { removeAll: false } }],
+                },
+            })
+        ]
+    },
     module: {
         rules: [
             {
